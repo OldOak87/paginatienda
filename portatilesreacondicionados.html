@@ -4,16 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Portátiles</title>
-    <style>
-        :root { --primary: #ff6600; --dark: #1e2229; --light-bg: #f8f9fa; --border-color: #e9ecef; --text-main: #495057; --shadow: 0 10px 30px rgba(0, 0, 0, 0.05); --transition: all 0.3s ease; }
-        body { font-family: 'Segoe UI', sans-serif; color: var(--text-main); background-color: #ffffff; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
-        h1 { text-align: center; color: var(--dark); margin-bottom: 50px; }
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .product-card { background: #ffffff; border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; transition: var(--transition); }
-        .product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow); }
-        .loading { text-align: center; padding: 50px; font-weight: bold; }
-    </style>
+<style>
+    :root { --primary: #ff6600; --dark: #1e2229; --light-bg: #f8f9fa; --border-color: #e9ecef; }
+
+    body { font-family: 'Segoe UI', sans-serif; background-color: var(--light-bg); padding: 40px 20px; }
+    
+    .products-grid { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+        gap: 25px; 
+        max-width: 1200px; 
+        margin: 0 auto; 
+    }
+
+    .product-card { 
+        background: #ffffff; 
+        border-radius: 12px; 
+        padding: 20px; 
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        transition: transform 0.2s;
+        border: 1px solid var(--border-color);
+    }
+    .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+
+    .product-image-container { 
+        width: 100%; 
+        height: 180px; 
+        overflow: hidden; 
+        border-radius: 8px; 
+        margin-bottom: 15px; 
+        background-color: #eee;
+    }
+    .product-image-container img { 
+        width: 100%; 
+        height: 100%; 
+        object-fit: contain; /* Esto evita que se deforme o sea gigante */
+    }
+
+    h3 { color: var(--dark); margin-bottom: 10px; font-size: 1.2rem; }
+    .product-price { color: var(--primary); font-weight: bold; font-size: 1.4rem; margin-top: 15px; display: block; }
+    .btn-buy { background: var(--primary); color: white; padding: 10px; text-align: center; border-radius: 6px; text-decoration: none; display: block; margin-top: 10px; }
+</style>
 </head>
 <body>
 
@@ -42,20 +73,19 @@
                 if (filas[i].trim() === "") continue;
                 const col = filas[i].split(','); 
                 
-                htmlAcumulado += `
-                    <div class="product-card">
-                        <img src="${col[9]}" alt="Portátil" style="max-width:100%; height:auto; border-radius:8px; margin-bottom:10px;">
-                        <h3>${col[0]} ${col[1]}</h3>
-                        <p>
-                            <strong>Pantalla:</strong> ${col[2]}<br>
-                            <strong>CPU:</strong> ${col[3]}<br>
-                            <strong>RAM:</strong> ${col[4]}<br>
-                            <strong>SSD:</strong> ${col[5]}<br>
-                            <strong>S.O:</strong> ${col[6]}<br>
-                            <strong>Extra:</strong> ${col[7]}
-                        </p>
-                        <p class="product-price"><strong>Precio:</strong> ${col[8]}</p>
-                    </div>`;
+               htmlAcumulado += `
+    <div class="product-card">
+        <div class="product-image-container">
+            <img src="${col[9].trim()}" alt="${col[1]}">
+        </div>
+        <h3>${col[0]} ${col[1]}</h3>
+        <p style="font-size: 0.9rem; color: #666;">
+            <strong>CPU:</strong> ${col[3]} | <strong>RAM:</strong> ${col[4]}<br>
+            <strong>SSD:</strong> ${col[5]}
+        </p>
+        <span class="product-price">${col[8]}</span>
+        <a href="tel:955620607" class="btn-buy">Reservar por teléfono</a>
+    </div>`;
             }
             
             contenedor.innerHTML = htmlAcumulado;
