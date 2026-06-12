@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Ordenadores</title>
+    <style>
+        :root { --primary: #ff6600; --dark: #1e2229; --light-bg: #f8f9fa; --border-color: #e9ecef; --text-main: #495057; --shadow: 0 10px 30px rgba(0, 0, 0, 0.05); --transition: all 0.3s ease; }
+        body { font-family: 'Segoe UI', sans-serif; color: var(--text-main); background-color: #ffffff; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        h1 { text-align: center; color: var(--dark); margin-bottom: 50px; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .product-card { background: #ffffff; border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; transition: var(--transition); }
+        .product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow); }
+        .loading { text-align: center; padding: 50px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Nuestro Catálogo de Ordenadores</h1>
+        <div id="contenedor-ordenadores" class="products-grid">
+            <div class="loading">Cargando catálogo...</div>
+        </div>
+    </div>
+
+    <script>
+        async function cargarOrdenadores() {
+            const contenedor = document.getElementById('contenedor-ordenadores');
+            try {
+                // Añadimos un timestamp al final para evitar que el navegador o el proxy guarden una versión corrupta en caché
+		const url = 'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://docs.google.com/spreadsheets/d/e/2PACX-1vSdhexOU7t2maISL623crBt7fgi1OE1WpicKy-STdiB_wsc_XXtFufO8Ua8_1XXV3cXFg-eZha3mcgu/pub?output=csv&t=' + new Date().getTime());                		const response = await fetch(url);
+                
+                if (!response.ok) throw new Error('Error HTTP: ' + response.status);
+                
+                const data = await response.text();
+                const filas = data.split('\n');
+                
+                let htmlAcumulado = '';
+                // Empezamos en i=1 para saltar la cabecera
+                for (let i = 1; i < filas.length; i++) {
+                    if (filas[i].trim() === "") continue;
+                    const col = filas[i].split(','); 
+                    
+                    htmlAcumulado += `
+                        <div class="product-card">
+                            <h3>${col[0]} ${col[1]}</h3>
+                            <p><strong>Precio:</strong> ${col[8]}</p>
+                        </div>`;
+                }
+                
+                contenedor.innerHTML = htmlAcumulado;
+            } catch (err) {
+                console.error("ERROR:", err);
+                contenedor.innerHTML = '<p style="color:red">Error en la carga: ' + err.message + '</p>';
+            }
+        }
+        
+        // Ejecutar al cargar la página
+        cargarOrdenadores();
+    </script>
+</body>
+</html>
