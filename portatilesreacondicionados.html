@@ -4,200 +4,186 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Portátiles</title>
-<style>
-<div id="contenedor-ordenadores" class="products-grid">
-    <div class="loading-wrapper pulse">
-        <span>Cargando nuestro catálogo profesional...</span>
-    </div>
-</div>
-.loading-wrapper {
-    text-align: center;
-    padding: 60px;
-    font-weight: 600;
-    color: var(--primary);
-    font-size: 1.2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
+    <style>
+        :root { --primary: #ff6600; --dark: #1e2229; --light-bg: #f4f4f4; }
 
-/* Animación de pulso */
-.pulse {
-    animation: pulse-animation 1.5s infinite;
-}
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--light-bg); padding: 20px; }
+        
+        .products-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); 
+            gap: 30px; 
+            max-width: 1100px; 
+            margin: 40px auto; 
+        }
 
-@keyframes pulse-animation {
-    0% { opacity: 0.3; }
-    50% { opacity: 1; }
-    100% { opacity: 0.3; }
-}
-    :root { --primary: #ff6600; --dark: #1e2229; --light-bg: #f4f4f4; }
+        .product-card { 
+            background: #ffffff; 
+            border-radius: 16px; 
+            padding: 15px; 
+            transition: 0.3s;
+            border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
 
-    body { font-family: 'Segoe UI', sans-serif; background-color: var(--light-bg); padding: 20px; }
-    
-    .products-grid { 
-        display: grid; 
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); 
-        gap: 30px; 
-        max-width: 1100px; 
-        margin: 40px auto; 
-    }
+        .product-image-container { 
+            width: 100%; 
+            height: 200px; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            margin-bottom: 15px;
+            background-color: #eee;
+        }
+        
+        .product-image-container img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: 0.5s;
+        }
 
-    .product-card { 
-        background: #ffffff; 
-        border-radius: 16px; 
-        padding: 15px; 
-        transition: 0.3s;
-        border: 1px solid #eee;
-        display: flex;
-        flex-direction: column;
-    }
-    .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        h3 { font-size: 1.1rem; color: var(--dark); margin-bottom: 10px; min-height: 2.4em; }
+        
+        .product-price { 
+            color: var(--primary); 
+            font-weight: 800; 
+            font-size: 1.5rem; 
+            margin: 15px 0; 
+            display: block; 
+        }
 
-    .product-image-container { 
-        width: 100%; 
-        height: 200px; /* Tamaño fijo pero elegante */
-        border-radius: 12px; 
-        overflow: hidden; 
-        margin-bottom: 15px;
-    }
-    
-    .product-image-container img { 
-        width: 100%; 
-        height: 100%; 
-        object-fit: cover; /* Recorta la imagen para que rellene el hueco sin deformarse */
-        transition: 0.5s;
-    }
+        .btn-buy { 
+            background: var(--dark); 
+            color: white; 
+            padding: 12px; 
+            text-align: center; 
+            border-radius: 8px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: 0.3s;
+        }
+        .btn-buy:hover { background: var(--primary); }
 
-    h3 { font-size: 1.1rem; color: var(--dark); margin-bottom: 10px; min-height: 2.4em; }
-    
-    .specs { font-size: 0.85rem; color: #666; margin-bottom: auto; line-height: 1.4; }
-    
-    .product-price { 
-        color: var(--primary); 
-        font-weight: 800; 
-        font-size: 1.5rem; 
-        margin: 15px 0; 
-        display: block; 
-    }
+        .page-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin: 60px 0 40px 0;
+            position: relative;
+            letter-spacing: -1px;
+        }
+        .page-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
 
-    .btn-buy { 
-        background: var(--dark); 
-        color: white; 
-        padding: 12px; 
-        text-align: center; 
-        border-radius: 8px; 
-        text-decoration: none; 
-        font-weight: bold; 
-        transition: 0.3s;
-    }
-    .btn-buy:hover { background: var(--primary); }
-    .page-title {
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--dark);
-    margin: 60px 0 40px 0;
-    position: relative;
-    letter-spacing: -1px;
-}
-
-.page-title::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 4px;
-    background-color: var(--primary);
-    margin: 15px auto 0;
-    border-radius: 2px;
-}
-</style>
+        .loading-wrapper {
+            text-align: center;
+            padding: 60px;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            animation: pulse-animation 1.5s infinite;
+        }
+        @keyframes pulse-animation {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+    </style>
 </head>
 <body>
 
     <div class="container">
         <h1 class="page-title">Nuestro Catálogo de Portátiles</h1>
         <div id="contenedor-ordenadores" class="products-grid">
-            <div class="loading">Cargando catálogo...</div>
+            <div class="loading-wrapper">
+                <span>Cargando nuestro catálogo profesional...</span>
+            </div>
         </div>
     </div>
-<script>
-    async function cargarOrdenadores() {
-        const contenedor = document.getElementById('contenedor-ordenadores');
-        try {
-            const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSdhexOU7t2maISL623crBt7fgi1OE1WpicKy-STdiB_wsc_XXtFufO8Ua8_1XXV3cXFg-eZha3mcgu/pub?gid=0&single=true&output=csv';
-            
-            const response = await fetch(url);
-            
-            if (!response.ok) throw new Error('Error HTTP: ' + response.status);
-            
-            const data = await response.text();
-            const filas = data.split('\n');
-            
-            let htmlAcumulado = '';
-            // Empezamos en i=1 para saltar la cabecera
-            for (let i = 1; i < filas.length; i++) {
-                if (filas[i].trim() === "") continue;
-                const col = filas[i].split(','); 
+
+    <script>
+        async function cargarOrdenadores() {
+            const contenedor = document.getElementById('contenedor-ordenadores');
+            try {
+                const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSdhexOU7t2maISL623crBt7fgi1OE1WpicKy-STdiB_wsc_XXtFufO8Ua8_1XXV3cXFg-eZha3mcgu/pub?gid=0&single=true&output=csv';
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Error HTTP: ' + response.status);
                 
-    htmlAcumulado += `
-    <div class="product-card">
-        <div class="product-image-container">
-            <img src="${col[9].trim()}" alt="${col[1]}">
-        </div>
-        <h3>${col[0]} ${col[1]}</h3>
-        <span class="product-price">${col[8]}</span>
-        
-        <div style="display:flex; gap:10px; margin-top:15px;">
-            <a href="tel:955620607" class="btn-buy" style="flex:1; background:#1e2229;">Reservar</a>
-            <button onclick="abrirModal('${col[0].replace(/'/g, "\\'")}', '${col[1].replace(/'/g, "\\'")}', '${col[2].replace(/'/g, "\\'")}', '${col[3].replace(/'/g, "\\'")}', '${col[4].replace(/'/g, "\\'")}', '${col[5].replace(/'/g, "\\'")}', '${col[6].replace(/'/g, "\\'")}', '${col[7].replace(/'/g, "\\'")}')" 
-                    style="flex:1; background:#ff6600; color:white; border:none; border-radius:8px; cursor:pointer;">
-                + Detalles
-            </button>
-        </div>
-    </div>`;
+                const data = await response.text();
+                const filas = data.split('\n');
+                
+                let htmlAcumulado = '';
+                for (let i = 1; i < filas.length; i++) {
+                    if (filas[i].trim() === "") continue;
+                    const col = filas[i].split(','); 
+                    
+                    htmlAcumulado += `
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="${col[9].trim()}" alt="${col[1]}">
+                        </div>
+                        <h3>${col[0]} ${col[1]}</h3>
+                        <span class="product-price">${col[8]}</span>
+                        <div style="display:flex; gap:10px; margin-top:15px;">
+                            <a href="tel:955620607" class="btn-buy" style="flex:1; background:#1e2229;">Reservar</a>
+                            <button onclick="abrirModal('${col[0].replace(/'/g, "\\'")}', '${col[1].replace(/'/g, "\\'")}', '${col[2].replace(/'/g, "\\'")}', '${col[3].replace(/'/g, "\\'")}', '${col[4].replace(/'/g, "\\'")}', '${col[5].replace(/'/g, "\\'")}', '${col[6].replace(/'/g, "\\'")}', '${col[7].replace(/'/g, "\\'")}')" 
+                                    style="flex:1; background:#ff6600; color:white; border:none; border-radius:8px; cursor:pointer;">
+                                + Detalles
+                            </button>
+                        </div>
+                    </div>`;
+                }
+                contenedor.innerHTML = htmlAcumulado;
+            } catch (err) {
+                console.error("ERROR:", err);
+                contenedor.innerHTML = '<p style="color:red; text-align:center;">Error en la carga: ' + err.message + '</p>';
             }
-            
-            contenedor.innerHTML = htmlAcumulado;
-            
-        } catch (err) {
-            console.error("ERROR:", err);
-            contenedor.innerHTML = '<p style="color:red">Error en la carga: ' + err.message + '</p>';
         }
-    }
 
-    // Ejecutar la función al cargar la página
-    cargarOrdenadores();
+        cargarOrdenadores();
 
-    function abrirModal(marca, modelo, pantalla, cpu, ram, ssd, so, extra) {
-    const modal = document.getElementById('modal-detalle');
-    const contenido = document.getElementById('contenido-modal');
-    contenido.innerHTML = `
-        <h2>${marca} ${modelo}</h2>
-        <ul style="margin:20px 0; list-style:none;">
-            <li><strong>Pantalla:</strong> ${pantalla}</li>
-            <li><strong>CPU:</strong> ${cpu}</li>
-            <li><strong>RAM:</strong> ${ram}</li>
-            <li><strong>SSD:</strong> ${ssd}</li>
-            <li><strong>S.O:</strong> ${so}</li>
-            <li><strong>Extras:</strong> ${extra}</li>
-        </ul>
-        <a href="tel:955620607" class="btn-buy">Reservar ahora</a>
-    `;
-    modal.style.display = 'flex';
-}
+        function abrirModal(marca, modelo, pantalla, cpu, ram, ssd, so, extra) {
+            const modal = document.getElementById('modal-detalle');
+            const contenido = document.getElementById('contenido-modal');
+            contenido.innerHTML = `
+                <h2 style="margin-bottom:15px;">${marca} ${modelo}</h2>
+                <ul style="margin:20px 0; list-style:none; line-height:2;">
+                    <li><strong>Pantalla:</strong> ${pantalla}</li>
+                    <li><strong>CPU:</strong> ${cpu}</li>
+                    <li><strong>RAM:</strong> ${ram}</li>
+                    <li><strong>SSD:</strong> ${ssd}</li>
+                    <li><strong>S.O:</strong> ${so}</li>
+                    <li><strong>Extras:</strong> ${extra}</li>
+                </ul>
+                <a href="tel:955620607" class="btn-buy" style="display:block;">Reservar ahora</a>
+            `;
+            modal.style.display = 'flex';
+        }
 
-function cerrarModal() {
-    document.getElementById('modal-detalle').style.display = 'none';
-}
-</script>
-    
-<div id="modal-detalle" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:1000; align-items:center; justify-content:center;">
-    <div style="background:white; padding:30px; border-radius:12px; max-width:500px; width:90%; position:relative;">
-        <span onclick="cerrarModal()" style="position:absolute; top:10px; right:20px; cursor:pointer; font-size:24px;">&times;</span>
-        <div id="contenido-modal"></div>
-    </div>
-</div>    
+        function cerrarModal() {
+            document.getElementById('modal-detalle').style.display = 'none';
+        }
+    </script>
+
+    <div id="modal-detalle" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:1000; align-items:center; justify-content:center;">
+        <div style="background:white; padding:30px; border-radius:12px; max-width:500px; width:90%; position:relative;">
+            <span onclick="cerrarModal()" style="position:absolute; top:10px; right:20px; cursor:pointer; font-size:24px;">&times;</span>
+            <div id="contenido-modal"></div>
+        </div>
+    </div>   
 </body>
 </html>
