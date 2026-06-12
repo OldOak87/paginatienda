@@ -5,6 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Portátiles</title>
 <style>
+<div id="contenedor-ordenadores" class="products-grid">
+    <div class="loading-wrapper pulse">
+        <span>Cargando nuestro catálogo profesional...</span>
+    </div>
+</div>
+.loading-wrapper {
+    text-align: center;
+    padding: 60px;
+    font-weight: 600;
+    color: var(--primary);
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Animación de pulso */
+.pulse {
+    animation: pulse-animation 1.5s infinite;
+}
+
+@keyframes pulse-animation {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+}
     :root { --primary: #ff6600; --dark: #1e2229; --light-bg: #f4f4f4; }
 
     body { font-family: 'Segoe UI', sans-serif; background-color: var(--light-bg); padding: 20px; }
@@ -66,12 +93,31 @@
         transition: 0.3s;
     }
     .btn-buy:hover { background: var(--primary); }
+    .page-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin: 60px 0 40px 0;
+    position: relative;
+    letter-spacing: -1px;
+}
+
+.page-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--primary);
+    margin: 15px auto 0;
+    border-radius: 2px;
+}
 </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Nuestro Catálogo de Portátiles</h1>
+        <h1 class="page-title">Nuestro Catálogo de Portátiles</h1>
         <div id="contenedor-ordenadores" class="products-grid">
             <div class="loading">Cargando catálogo...</div>
         </div>
@@ -105,7 +151,7 @@
         
         <div style="display:flex; gap:10px; margin-top:15px;">
             <a href="tel:955620607" class="btn-buy" style="flex:1; background:#1e2229;">Reservar</a>
-            <button onclick="abrirModal('${col[0]}', '${col[1]}', '${col[2]}', '${col[3]}', '${col[4]}', '${col[5]}', '${col[6]}', '${col[7]}')" 
+            <button onclick="abrirModal('${col[0].replace(/'/g, "\\'")}', '${col[1].replace(/'/g, "\\'")}', '${col[2].replace(/'/g, "\\'")}', '${col[3].replace(/'/g, "\\'")}', '${col[4].replace(/'/g, "\\'")}', '${col[5].replace(/'/g, "\\'")}', '${col[6].replace(/'/g, "\\'")}', '${col[7].replace(/'/g, "\\'")}')" 
                     style="flex:1; background:#ff6600; color:white; border:none; border-radius:8px; cursor:pointer;">
                 + Detalles
             </button>
