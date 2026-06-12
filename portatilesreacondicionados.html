@@ -23,49 +23,45 @@
             <div class="loading">Cargando catálogo...</div>
         </div>
     </div>
-
-    <script>
-        async function cargarOrdenadores() {
-    const contenedor = document.getElementById('contenedor-ordenadores');
-    try {
-        // URL limpia, sin proxys ni intermediarios
-        const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSdhexOU7t2maISL623crBt7fgi1OE1WpicKy-STdiB_wsc_XXtFufO8Ua8_1XXV3cXFg-eZha3mcgu/pub?gid=0&single=true&output=csv';
-        
-        const response = await fetch(url);
-        
-        if (!response.ok) throw new Error('Error HTTP: ' + response.status);
-        
-        const data = await response.text();
-        const filas = data.split('\n');
-        
-        let htmlAcumulado = '';
-        for (let i = 1; i < filas.length; i++) {
-            if (filas[i].trim() === "") continue;
-            const col = filas[i].split(','); 
+<script>
+    async function cargarOrdenadores() {
+        const contenedor = document.getElementById('contenedor-ordenadores');
+        try {
+            const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSdhexOU7t2maISL623crBt7fgi1OE1WpicKy-STdiB_wsc_XXtFufO8Ua8_1XXV3cXFg-eZha3mcgu/pub?gid=0&single=true&output=csv';
             
-            htmlAcumulado += `
-                <div class="product-card">
-                    <h3>${col[0]} ${col[1]}</h3>
-                    <p><strong>Precio:</strong> ${col[8]}</p>
-                </div>`;
-        }
-        
-        contenedor.innerHTML = htmlAcumulado;
-    } catch (err) {
-        console.error("ERROR:", err);
-        contenedor.innerHTML = '<p style="color:red">Error en la carga: ' + err.message + '</p>';
-    }
-}
+            const response = await fetch(url);
+            
+            if (!response.ok) throw new Error('Error HTTP: ' + response.status);
+            
+            const data = await response.text();
+            const filas = data.split('\n');
+            
+            let htmlAcumulado = '';
+            // Empezamos en i=1 para saltar la cabecera
+            for (let i = 1; i < filas.length; i++) {
+                if (filas[i].trim() === "") continue;
+                const col = filas[i].split(','); 
                 
-                contenedor.innerHTML = htmlAcumulado;
-            } catch (err) {
-                console.error("ERROR:", err);
-                contenedor.innerHTML = '<p style="color:red">Error en la carga: ' + err.message + '</p>';
+                // Asegúrate de que col[0], col[1] y col[8] existen antes de inyectar
+                htmlAcumulado += `
+                    <div class="product-card">
+                        <h3>${col[0] || 'N/A'} ${col[1] || ''}</h3>
+                        <p><strong>Precio:</strong> ${col[8] || 'Consultar'}</p>
+                    </div>`;
             }
+            
+            contenedor.innerHTML = htmlAcumulado;
+            
+        } catch (err) {
+            console.error("ERROR:", err);
+            contenedor.innerHTML = '<p style="color:red">Error en la carga: ' + err.message + '</p>';
         }
-        
-        // Ejecutar al cargar la página
-        cargarOrdenadores();
-    </script>
+    }
+
+    // Ejecutar la función al cargar la página
+    cargarOrdenadores();
+</script>
+    
+    
 </body>
 </html>
