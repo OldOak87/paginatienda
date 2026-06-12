@@ -29,7 +29,8 @@
             const contenedor = document.getElementById('contenedor-ordenadores');
             try {
                 // Añadimos un timestamp al final para evitar que el navegador o el proxy guarden una versión corrupta en caché
-		const url = 'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://docs.google.com/spreadsheets/d/e/2PACX-1vSdhexOU7t2maISL623crBt7fgi1OE1WpicKy-STdiB_wsc_XXtFufO8Ua8_1XXV3cXFg-eZha3mcgu/pub?output=csv&t=' + new Date().getTime());                		const response = await fetch(url);
+		// URL directa, sin corsproxy ni allorigins
+const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSdhexOU7t2maISL623crBt7fgi1OE1WpicKy-STdiB_wsc_XXtFufO8Ua8_1XXV3cXFg-eZha3mcgu/pub?output=csv';
                 
                 if (!response.ok) throw new Error('Error HTTP: ' + response.status);
                 
