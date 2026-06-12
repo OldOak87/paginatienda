@@ -45,9 +45,17 @@
                 // Asegúrate de que col[0], col[1] y col[8] existen antes de inyectar
                 htmlAcumulado += `
                     <div class="product-card">
-                        <h3>${col[0] || 'N/A'} ${col[1] || ''}</h3>
-                        <p><strong>Precio:</strong> ${col[8] || 'Consultar'}</p>
-                    </div>`;
+        <h3>${col[0]} ${col[1]}</h3>
+        <p>
+            <strong>Pantalla:</strong> ${col[2]}<br>
+            <strong>CPU:</strong> ${col[3]}<br>
+            <strong>RAM:</strong> ${col[4]}<br>
+            <strong>SSD:</strong> ${col[5]}<br>
+            <strong>S.O:</strong> ${col[6]}<br>
+            <strong>Extra:</strong> ${col[7]}
+        </p>
+        <p class="product-price"><strong>Precio:</strong> ${col[8]}</p>
+    </div>`;
             }
             
             contenedor.innerHTML = htmlAcumulado;
