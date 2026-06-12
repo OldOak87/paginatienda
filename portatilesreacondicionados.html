@@ -86,16 +86,22 @@
         }
 
         .loading-wrapper {
-            text-align: center;
-            padding: 60px;
-            font-weight: 600;
-            color: var(--primary);
-            font-size: 1.2rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            animation: pulse-animation 1.5s infinite;
+    position: absolute; /* Para centrarlo en pantalla */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-weight: 800;
+    color: var(--primary);
+    font-size: 2rem; /* Mucho más grande */
+    display: flex;
+    flex-direction: column; /* Coloca el icono arriba y el texto abajo */
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    animation: pulse-animation 1.5s infinite;
+}
         }
         @keyframes pulse-animation {
             0% { opacity: 0.3; }
@@ -105,15 +111,15 @@
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <h1 class="page-title">Nuestro Catálogo de Portátiles</h1>
-        <div id="contenedor-ordenadores" class="products-grid">
-            <div class="loading-wrapper">
-                <span>Cargando nuestro catálogo profesional...</span>
-            </div>
-        </div>
+.container {
+    position: relative;
+    min-height: 400px; /* Asegura espacio suficiente para ver el mensaje centrado */
+}
+    <div id="contenedor-ordenadores" class="products-grid">
+    <div class="loading-wrapper">
+        <span style="font-size: 4rem;">⚙️</span> <span>Cargando catálogo profesional...</span>
     </div>
+</div>
 
     <script>
         async function cargarOrdenadores() {
