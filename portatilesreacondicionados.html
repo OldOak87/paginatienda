@@ -26,29 +26,36 @@
 
     <script>
         async function cargarOrdenadores() {
-            const contenedor = document.getElementById('contenedor-ordenadores');
-            try {
-                // Añadimos un timestamp al final para evitar que el navegador o el proxy guarden una versión corrupta en caché
-		// URL directa, sin corsproxy ni allorigins
-const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSdhexOU7t2maISL623crBt7fgi1OE1WpicKy-STdiB_wsc_XXtFufO8Ua8_1XXV3cXFg-eZha3mcgu/pub?output=csv';
-                
-                if (!response.ok) throw new Error('Error HTTP: ' + response.status);
-                
-                const data = await response.text();
-                const filas = data.split('\n');
-                
-                let htmlAcumulado = '';
-                // Empezamos en i=1 para saltar la cabecera
-                for (let i = 1; i < filas.length; i++) {
-                    if (filas[i].trim() === "") continue;
-                    const col = filas[i].split(','); 
-                    
-                    htmlAcumulado += `
-                        <div class="product-card">
-                            <h3>${col[0]} ${col[1]}</h3>
-                            <p><strong>Precio:</strong> ${col[8]}</p>
-                        </div>`;
-                }
+    const contenedor = document.getElementById('contenedor-ordenadores');
+    try {
+        // URL limpia, sin proxys ni intermediarios
+        const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSdhexOU7t2maISL623crBt7fgi1OE1WpicKy-STdiB_wsc_XXtFufO8Ua8_1XXV3cXFg-eZha3mcgu/pub?output=csv';
+        
+        const response = await fetch(url);
+        
+        if (!response.ok) throw new Error('Error HTTP: ' + response.status);
+        
+        const data = await response.text();
+        const filas = data.split('\n');
+        
+        let htmlAcumulado = '';
+        for (let i = 1; i < filas.length; i++) {
+            if (filas[i].trim() === "") continue;
+            const col = filas[i].split(','); 
+            
+            htmlAcumulado += `
+                <div class="product-card">
+                    <h3>${col[0]} ${col[1]}</h3>
+                    <p><strong>Precio:</strong> ${col[8]}</p>
+                </div>`;
+        }
+        
+        contenedor.innerHTML = htmlAcumulado;
+    } catch (err) {
+        console.error("ERROR:", err);
+        contenedor.innerHTML = '<p style="color:red">Error en la carga: ' + err.message + '</p>';
+    }
+}
                 
                 contenedor.innerHTML = htmlAcumulado;
             } catch (err) {
