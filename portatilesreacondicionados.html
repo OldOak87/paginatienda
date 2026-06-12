@@ -123,6 +123,28 @@
 
     // Ejecutar la función al cargar la página
     cargarOrdenadores();
+
+    function abrirModal(marca, modelo, pantalla, cpu, ram, ssd, so, extra) {
+    const modal = document.getElementById('modal-detalle');
+    const contenido = document.getElementById('contenido-modal');
+    contenido.innerHTML = `
+        <h2>${marca} ${modelo}</h2>
+        <ul style="margin:20px 0; list-style:none;">
+            <li><strong>Pantalla:</strong> ${pantalla}</li>
+            <li><strong>CPU:</strong> ${cpu}</li>
+            <li><strong>RAM:</strong> ${ram}</li>
+            <li><strong>SSD:</strong> ${ssd}</li>
+            <li><strong>S.O:</strong> ${so}</li>
+            <li><strong>Extras:</strong> ${extra}</li>
+        </ul>
+        <a href="tel:955620607" class="btn-buy">Reservar ahora</a>
+    `;
+    modal.style.display = 'flex';
+}
+
+function cerrarModal() {
+    document.getElementById('modal-detalle').style.display = 'none';
+}
 </script>
     
 <div id="modal-detalle" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:1000; align-items:center; justify-content:center;">
