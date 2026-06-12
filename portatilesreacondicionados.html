@@ -7,119 +7,71 @@
     <style>
         :root { --primary: #ff6600; --dark: #1e2229; --light-bg: #f4f4f4; }
 
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--light-bg); padding: 20px; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--light-bg); padding: 20px; margin: 0; }
+        
+        .container { position: relative; min-height: 400px; max-width: 1100px; margin: 0 auto; }
         
         .products-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); 
             gap: 30px; 
-            max-width: 1100px; 
             margin: 40px auto; 
         }
 
         .product-card { 
-            background: #ffffff; 
-            border-radius: 16px; 
-            padding: 15px; 
-            transition: 0.3s;
-            border: 1px solid #eee;
-            display: flex;
-            flex-direction: column;
+            background: #ffffff; border-radius: 16px; padding: 15px; 
+            transition: 0.3s; border: 1px solid #eee; display: flex; flex-direction: column;
         }
         .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
 
         .product-image-container { 
-            width: 100%; 
-            height: 200px; 
-            border-radius: 12px; 
-            overflow: hidden; 
-            margin-bottom: 15px;
-            background-color: #eee;
+            width: 100%; height: 200px; border-radius: 12px; 
+            overflow: hidden; margin-bottom: 15px; background-color: #eee;
         }
         
-        .product-image-container img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            transition: 0.5s;
-        }
+        .product-image-container img { width: 100%; height: 100%; object-fit: cover; }
 
         h3 { font-size: 1.1rem; color: var(--dark); margin-bottom: 10px; min-height: 2.4em; }
         
-        .product-price { 
-            color: var(--primary); 
-            font-weight: 800; 
-            font-size: 1.5rem; 
-            margin: 15px 0; 
-            display: block; 
-        }
+        .product-price { color: var(--primary); font-weight: 800; font-size: 1.5rem; margin: 15px 0; display: block; }
 
         .btn-buy { 
-            background: var(--dark); 
-            color: white; 
-            padding: 12px; 
-            text-align: center; 
-            border-radius: 8px; 
-            text-decoration: none; 
-            font-weight: bold; 
-            transition: 0.3s;
+            background: var(--dark); color: white; padding: 12px; text-align: center; 
+            border-radius: 8px; text-decoration: none; font-weight: bold; transition: 0.3s;
         }
         .btn-buy:hover { background: var(--primary); }
 
         .page-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--dark);
-            margin: 60px 0 40px 0;
-            position: relative;
-            letter-spacing: -1px;
+            text-align: center; font-size: 2.5rem; font-weight: 800; color: var(--dark);
+            margin: 60px 0 40px 0; position: relative; letter-spacing: -1px;
         }
         .page-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background-color: var(--primary);
-            margin: 15px auto 0;
-            border-radius: 2px;
+            content: ''; display: block; width: 60px; height: 4px; 
+            background-color: var(--primary); margin: 15px auto 0; border-radius: 2px;
         }
 
         .loading-wrapper {
-    position: absolute; /* Para centrarlo en pantalla */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    font-weight: 800;
-    color: var(--primary);
-    font-size: 2rem; /* Mucho más grande */
-    display: flex;
-    flex-direction: column; /* Coloca el icono arriba y el texto abajo */
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    width: 100%;
-    animation: pulse-animation 1.5s infinite;
-}
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            text-align: center; font-weight: 800; color: var(--primary);
+            font-size: 2rem; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; gap: 20px; width: 100%;
+            animation: pulse-animation 1.5s infinite;
         }
         @keyframes pulse-animation {
-            0% { opacity: 0.3; }
-            50% { opacity: 1; }
-            100% { opacity: 0.3; }
+            0% { opacity: 0.3; } 50% { opacity: 1; } 100% { opacity: 0.3; }
         }
     </style>
 </head>
 <body>
-.container {
-    position: relative;
-    min-height: 400px; /* Asegura espacio suficiente para ver el mensaje centrado */
-}
-    <div id="contenedor-ordenadores" class="products-grid">
-    <div class="loading-wrapper">
-        <span style="font-size: 4rem;">⚙️</span> <span>Cargando catálogo profesional...</span>
+
+    <div class="container">
+        <h1 class="page-title">Nuestro Catálogo de Portátiles</h1>
+        <div id="contenedor-ordenadores" class="products-grid">
+            <div class="loading-wrapper">
+                <span style="font-size: 4rem;">⚙️</span> <span>Cargando catálogo profesional...</span>
+            </div>
+        </div>
     </div>
-</div>
 
     <script>
         async function cargarOrdenadores() {
@@ -156,7 +108,7 @@
                 contenedor.innerHTML = htmlAcumulado;
             } catch (err) {
                 console.error("ERROR:", err);
-                contenedor.innerHTML = '<p style="color:red; text-align:center;">Error en la carga: ' + err.message + '</p>';
+                contenedor.innerHTML = '<p style="color:red; text-align:center; grid-column: 1/-1;">Error: ' + err.message + '</p>';
             }
         }
 
@@ -187,9 +139,4 @@
 
     <div id="modal-detalle" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:1000; align-items:center; justify-content:center;">
         <div style="background:white; padding:30px; border-radius:12px; max-width:500px; width:90%; position:relative;">
-            <span onclick="cerrarModal()" style="position:absolute; top:10px; right:20px; cursor:pointer; font-size:24px;">&times;</span>
-            <div id="contenido-modal"></div>
-        </div>
-    </div>   
-</body>
-</html>
+            <span onclick="cerrarModal()" style="position:absolute; top:10px; right:20px; cursor:pointer; font-size:24px;">&times;
