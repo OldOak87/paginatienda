@@ -5,8 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Portátiles</title>
     <style>
+/* ==========================================================================
+   VARIABLES Y CONFIGURACIÓN CORPORATIVA (OPCIÓN 1: TECH HERO)
+   ========================================================================== */
+:root {
+    --primary: #ff6600;        /* Naranja corporativo Microdata */
+    --primary-hover: #e05500;
+    --dark: #1e2229;           /* Gris técnico oscuro */
+    --light-bg: #f8f9fa;       /* Fondo limpio */
+    --border-color: #e9ecef;
+    --text-main: #495057;
+    --text-title: #212529;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-		/* ==========================================================================
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: var(--text-main);
+    background-color: #ffffff;
+    line-height: 1.6;
+    background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+    background-size: 24px 24px; /* Sutil patrón de fondo de ingeniería */
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ==========================================================================
    TOP BAR & HEADER
    ========================================================================== */
 .top-bar {
@@ -76,6 +112,228 @@
     background-color: var(--primary);
     color: #ffffff;
 }
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+.hero {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #ffffff 0%, var(--light-bg) 100%);
+}
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 60px;
+    align-items: center;
+}
+.badge {
+    background-color: rgba(255, 102, 0, 0.1);
+    color: var(--primary);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+.hero-text h1 {
+    font-size: 3.2rem;
+    color: var(--dark);
+    line-height: 1.2;
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+.hero-text p {
+    font-size: 1.15rem;
+    margin-bottom: 36px;
+    max-width: 600px;
+}
+.hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+.btn {
+    padding: 14px 32px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-primary {
+    background-color: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(255, 102, 0, 0.3);
+}
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+}
+.btn-secondary {
+    background-color: #ffffff;
+    color: var(--dark);
+    border: 2px solid var(--border-color);
+}
+.btn-secondary:hover {
+    background-color: var(--light-bg);
+    border-color: var(--dark);
+}
+
+/* Visual derecha del Hero */
+.tech-card-visual {
+    background: var(--dark);
+    border-radius: 16px;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+.tech-icon-large {
+    font-size: 120px !important;
+    color: rgba(255, 102, 0, 0.15);
+}
+.tech-badge {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    background-color: var(--primary);
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   SECCIÓN SERVICIOS (GRID MODERNO)
+   ========================================================================== */
+.services-section {
+    padding: 100px 0;
+    background-color: #ffffff;
+}
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+}
+.section-title h2 {
+    font-size: 2.4rem;
+    color: var(--dark);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+.service-card {
+    background-color: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 40px 30px;
+    position: relative;
+    transition: var(--transition);
+}
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow);
+    border-color: transparent;
+}
+.card-icon-wrapper {
+    color: var(--primary);
+    margin-bottom: 24px;
+}
+.card-icon-wrapper .material-symbols-outlined {
+    font-size: 36px;
+}
+.service-card h3 {
+    font-size: 1.4rem;
+    color: var(--dark);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+.service-card p {
+    font-size: 0.95rem;
+    color: var(--text-main);
+}
+
+/* Variación Tarjeta Destacada Electrónica */
+.service-card.highlighted {
+    background-color: var(--dark);
+    border-color: var(--dark);
+}
+.service-card.highlighted h3 {
+    color: #ffffff;
+}
+.service-card.highlighted p {
+    color: #a0aec0;
+}
+.service-card.highlighted .card-icon-wrapper {
+    color: var(--primary);
+}
+.card-badge {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background-color: var(--primary);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+   RESPONSIVE (ADAPTACIÓN MÓVIL)
+   ========================================================================== */
+@media (max-width: 992px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+    .hero-text h1 {
+        font-size: 2.4rem;
+    }
+    .hero-text p {
+        margin: 0 auto 30px;
+    }
+    .hero-actions {
+        justify-content: center;
+    }
+    .tech-card-visual {
+        height: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+        gap: 20px;
+    }
+    .main-nav {
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .top-bar-content {
+        justify-content: center;
+        text-align: center;
+    }
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 		
         :root { --primary: #ff6600; --dark: #1e2229; --light-bg: #f4f4f4; }
 
