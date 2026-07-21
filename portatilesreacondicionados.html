@@ -368,140 +368,137 @@ body {
     </div> 
 
     <script>
-        // Función auxiliar para parsear líneas de CSV respetando comillas
-        function parsearCSV(linea) {
-            const valores = [];
-            let valorActual = '';
-            let dentroDeComillas = false;
+    // Función de extracción ultra segura para CSV
+    function parsearLineaCSV(linea) {
+        const resultado = [];
+        let dentroComillas = false;
+        let campo = '';
 
-            for (let i = 0; i < linea.length; i++) {
-                const char = linea[i];
-                if (char === '"' || char === "'") {
-                    dentroDeComillas = !dentroDeComillas;
-                } else if (char === ',' && !dentroDeComillas) {
-                    valores.push(valorActual.trim().replace(/^["']|["']$/g, ''));
-                    valorActual = '';
-                } else {
-                    valorActual += char;
-                }
-            }
-            valores.push(valorActual.trim().replace(/^["']|["']$/g, ''));
-            return valores;
-        }
+        for (let i = 0; i < linea.length; i++) {
+            const char = linea[i];
 
-        async function cargarOrdenadores() {
-    const contenedor = document.getElementById('contenedor-ordenadores');
-    if (!contenedor) return;
-
-    try {
-        const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSdhexOU7t2maISL623crBt7fgi1OE1WpicKy-STdiB_wsc_XXtFufO8Ua8_1XXV3cXFg-eZha3mcgu/pub?gid=0&single=true&output=csv';
-        
-        const response = await fetch(url);
-        if (!response.ok) throw new Error('Error HTTP: ' + response.status);
-        
-        const data = await response.text();
-        const filas = data.split(/\r?\n/);
-        
-        let htmlAcumulado = '';
-        
-        for (let i = 1; i < filas.length; i++) {
-            if (!filas[i].trim()) continue; // Ignora líneas completamente vacías
-            
-            const col = parsearCSV(filas[i]);
-            
-            // Requisito mínimo: que al menos exista la marca o modelo (mínimo 2 columnas)
-            if (col.length < 2) continue;
-
-            const marca = col[0] || 'Portátil';
-            const modelo = col[1] || 'Reacondicionado';
-            const pantalla = col[2] || 'Consultar';
-            const cpu = col[3] || 'Consultar';
-            const ram = col[4] || 'Consultar';
-            const ssd = col[5] || 'Consultar';
-            const so = col[6] || 'Consultar';
-            const extra = col[7] || 'Sin observaciones extras';
-            const precio = col[8] || 'Consultar';
-            const imagen = col[9] ? col[9].trim() : '';
-
-            // Comprobamos si la imagen es una URL válida
-            let imgTag = '';
-            if (imagen && imagen.toLowerCase().startsWith('http')) {
-                // Si la URL falla al cargar la imagen real, entra en onerror y pone el icono
-                imgTag = `<img src="${imagen}" alt="${marca} ${modelo}" onerror="this.outerHTML='<span class=\\'material-symbols-outlined\\' style=\\'font-size:64px; color:#cbd5e1;\\'>laptop_chromebook</span>';">`;
+            if (char === '"' || char === "'") {
+                dentroComillas = !dentroComillas;
+            } else if (char === ',' && !dentroComillas) {
+                resultado.push(campo.trim().replace(/^["']|["']$/g, ''));
+                campo = '';
             } else {
-                // Si la casilla está vacía o no es una URL, muestra el icono por defecto
-                imgTag = `<span class="material-symbols-outlined" style="font-size:64px; color:#cbd5e1;">laptop_chromebook</span>`;
+                campo += char;
             }
-
-            const datosClean = [marca, modelo, pantalla, cpu, ram, ssd, so, extra]
-                .map(item => item.replace(/'/g, "\\'").replace(/"/g, '&quot;'));
-
-            htmlAcumulado += `
-            <div class="product-card">
-                <div class="product-image-container">
-                    ${imgTag}
-                </div>
-                <h3>${marca} ${modelo}</h3>
-                <span class="product-price">${precio}</span>
-                <div class="card-actions">
-                    <a href="tel:955620607" class="btn-buy">Reservar</a>
-                    <button onclick="abrirModal('${datosClean.join("','")}')" class="btn-details">
-                        + Detalles
-                    </button>
-                </div>
-            </div>`;
         }
-
-        contenedor.innerHTML = htmlAcumulado || '<p style="text-align:center; grid-column: 1/-1;">No hay equipos disponibles en este momento.</p>';
-
-    } catch (err) {
-        console.error("ERROR:", err);
-        contenedor.innerHTML = '<p style="color:#e63946; text-align:center; grid-column: 1/-1; font-weight:bold;">Error al cargar el catálogo.</p>';
+        resultado.push(campo.trim().replace(/^["']|["']$/g, ''));
+        return resultado;
     }
-}
-                if (htmlAcumulado === '') {
-                    contenedor.innerHTML = '<p style="text-align:center; grid-column: 1/-1;">No hay productos disponibles en este momento.</p>';
+
+    async function cargarOrdenadores() {
+        const contenedor = document.getElementById('contenedor-ordenadores');
+        if (!contenedor) return;
+
+        try {
+            const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSdhexOU7t2maISL623crBt7fgi1OE1WpicKy-STdiB_wsc_XXtFufO8Ua8_1XXV3cXFg-eZha3mcgu/pub?gid=0&single=true&output=csv';
+            
+            // Añadimos cache: 'no-cache' para obtener los datos siempre actualizados
+            const response = await fetch(url, { cache: 'no-cache' });
+            if (!response.ok) throw new Error('No se pudo conectar con Google Sheets (Estado: ' + response.status + ')');
+            
+            const data = await response.text();
+            
+            // Limpiamos retornos de carro y dividimos por saltos de línea
+            const filas = data.replace(/\r/g, '').split('\n');
+            
+            let htmlAcumulado = '';
+            
+            for (let i = 1; i < filas.length; i++) {
+                const linea = filas[i].trim();
+                if (!linea) continue; // Salta líneas vacías
+                
+                const col = parsearLineaCSV(linea);
+                if (col.length < 2) continue; // Debe tener al menos marca o modelo
+
+                // Asignación segura con valores por defecto
+                const marca = (col[0] || 'Portátil').replace(/</g, "&lt;");
+                const modelo = (col[1] || 'Reacondicionado').replace(/</g, "&lt;");
+                const pantalla = (col[2] || 'Consultar').replace(/</g, "&lt;");
+                const cpu = (col[3] || 'Consultar').replace(/</g, "&lt;");
+                const ram = (col[4] || 'Consultar').replace(/</g, "&lt;");
+                const ssd = (col[5] || 'Consultar').replace(/</g, "&lt;");
+                const so = (col[6] || 'Consultar').replace(/</g, "&lt;");
+                const extra = (col[7] || 'Sin observaciones').replace(/</g, "&lt;");
+                const precio = (col[8] || 'Consultar').replace(/</g, "&lt;");
+                const imagen = col[9] ? col[9].trim() : '';
+
+                // Control de imagen
+                let imgHTML = '';
+                if (imagen && imagen.toLowerCase().startsWith('http')) {
+                    imgHTML = `<img src="${imagen}" alt="${marca} ${modelo}" onerror="this.outerHTML='<span class=\\'material-symbols-outlined\\' style=\\'font-size:64px; color:#cbd5e1;\\'>laptop_chromebook</span>';">`;
                 } else {
-                    contenedor.innerHTML = htmlAcumulado;
+                    imgHTML = `<span class="material-symbols-outlined" style="font-size:64px; color:#cbd5e1;">laptop_chromebook</span>`;
                 }
 
-            } catch (err) {
-                console.error("ERROR:", err);
-                contenedor.innerHTML = '<p style="color:#e63946; text-align:center; grid-column: 1/-1; font-weight:bold;">Error al cargar el catálogo de Google Sheets. Revisa la conexión.</p>';
+                // Limpiamos comillas dobles y simples para evitar fallos en la función del botón + Detalles
+                const paramsModal = [marca, modelo, pantalla, cpu, ram, ssd, so, extra]
+                    .map(val => val.replace(/'/g, "\\'").replace(/"/g, '&quot;'));
+
+                htmlAcumulado += `
+                <div class="product-card">
+                    <div class="product-image-container">
+                        ${imgHTML}
+                    </div>
+                    <h3>${marca} ${modelo}</h3>
+                    <span class="product-price">${precio}</span>
+                    <div class="card-actions">
+                        <a href="tel:955620607" class="btn-buy">Reservar</a>
+                        <button onclick="abrirModal('${paramsModal.join("','")}')" class="btn-details">
+                            + Detalles
+                        </button>
+                    </div>
+                </div>`;
             }
-        }
 
-        cargarOrdenadores();
+            contenedor.innerHTML = htmlAcumulado || '<p style="text-align:center; grid-column: 1/-1;">No hay equipos cargados en la hoja de cálculo.</p>';
 
-        function abrirModal(marca, modelo, pantalla, cpu, ram, ssd, so, extra) {
-            const modal = document.getElementById('modal-detalle');
-            const contenido = document.getElementById('contenido-modal');
-            contenido.innerHTML = `
-                <h2 style="margin-bottom:15px; color: var(--dark);">${marca} ${modelo}</h2>
-                <ul class="modal-specs-list">
-                    <li><strong>Pantalla:</strong> ${pantalla}</li>
-                    <li><strong>Procesador:</strong> ${cpu}</li>
-                    <li><strong>Memoria RAM:</strong> ${ram}</li>
-                    <li><strong>Almacenamiento SSD:</strong> ${ssd}</li>
-                    <li><strong>Sistema Operativo:</strong> ${so}</li>
-                    <li><strong>Notas/Extras:</strong> ${extra}</li>
-                </ul>
-                <a href="tel:955620607" class="btn-buy" style="display:block; padding:12px; margin-top:15px;">Reservar por teléfono</a>
-            `;
-            modal.style.display = 'flex';
+        } catch (err) {
+            console.error("Error detectado:", err);
+            contenedor.innerHTML = `
+                <div style="grid-column: 1/-1; text-align: center; padding: 30px; background: #fff3f3; border: 1px solid #ffcdd2; border-radius: 8px;">
+                    <p style="color:#d32f2f; font-weight:bold; font-size: 1.1rem;">⚠️ Hubo un problema al cargar la lista de ordenadores</p>
+                    <p style="color:#555; margin-top:5px; font-size: 0.9rem;">Detalle: ${err.message}</p>
+                </div>`;
         }
+    }
 
-        function cerrarModal() {
-            document.getElementById('modal-detalle').style.display = 'none';
-        }
+    // Modal de especificaciones
+    function abrirModal(marca, modelo, pantalla, cpu, ram, ssd, so, extra) {
+        const modal = document.getElementById('modal-detalle');
+        const contenido = document.getElementById('contenido-modal');
+        contenido.innerHTML = `
+            <h2 style="margin-bottom:15px; color: var(--dark);">${marca} ${modelo}</h2>
+            <ul class="modal-specs-list">
+                <li><strong>Pantalla:</strong> ${pantalla}</li>
+                <li><strong>Procesador:</strong> ${cpu}</li>
+                <li><strong>Memoria RAM:</strong> ${ram}</li>
+                <li><strong>SSD:</strong> ${ssd}</li>
+                <li><strong>Sistema Operativo:</strong> ${so}</li>
+                <li><strong>Observaciones:</strong> ${extra}</li>
+            </ul>
+            <a href="tel:955620607" class="btn-buy" style="display:block; padding:12px; margin-top:15px; text-align:center;">Reservar por teléfono</a>
+        `;
+        modal.style.display = 'flex';
+    }
 
-        // Cerrar modal al hacer clic fuera del recuadro
-        window.onclick = function(event) {
-            const modal = document.getElementById('modal-detalle');
-            if (event.target === modal) {
-                cerrarModal();
-            }
-        }
-    </script>
+    function cerrarModal() {
+        document.getElementById('modal-detalle').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        const modal = document.getElementById('modal-detalle');
+        if (event.target === modal) cerrarModal();
+    }
+
+    // Forzamos el inicio de carga en cuanto la página esté lista
+    document.addEventListener('DOMContentLoaded', cargarOrdenadores);
+    // Ejecución directa de respaldo por si el evento ya sucedió
+    cargarOrdenadores();
+</script>
 </body>
 </html>
