@@ -5,12 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Microdata Informática | Servicio Técnico en Alcalá de Guadaíra</title>
     <meta name="description" content="Servicio técnico profesional de ordenadores, portátiles, móviles, consolas y reparación en Alcalá de Guadaíra, Sevilla.">
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
     <style>
     /* ==========================================================================
-       VARIABLES Y CONFIGURACIÓN CORPORATIVA (OPCIÓN 1: TECH HERO)
+       VARIABLES Y CONFIGURACIÓN CORPORATIVA
        ========================================================================== */
     :root {
         --primary: #ff6600;        /* Naranja corporativo Microdata */
@@ -22,6 +21,10 @@
         --text-title: #212529;
         --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html {
+        scroll-behavior: smooth;
     }
 
     * {
@@ -36,7 +39,7 @@
         background-color: #ffffff;
         line-height: 1.6;
         background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
-        background-size: 24px 24px; /* Sutil patrón de fondo de ingeniería */
+        background-size: 24px 24px;
     }
 
     .container {
@@ -106,15 +109,25 @@
     .nav-link:hover, .nav-link.active {
         color: var(--primary);
     }
-    .btn-header {
-        background-color: var(--dark);
-        color: #ffffff;
+
+    .btn-whatsapp-nav {
+        background-color: #25d366;
+        color: #ffffff !important;
         padding: 10px 20px;
         border-radius: 6px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.95rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: var(--transition);
     }
-    .btn-header:hover {
-        background-color: var(--primary);
-        color: #ffffff;
+
+    .btn-whatsapp-nav:hover {
+        background-color: #1ebc57;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
     }
 
     /* ==========================================================================
@@ -179,44 +192,9 @@
         background-color: var(--primary-hover);
         transform: translateY(-2px);
     }
-    .btn-secondary {
-        background-color: #ffffff;
-        color: var(--dark);
-        border: 2px solid var(--border-color);
-    }
-    .btn-secondary:hover {
-        background-color: var(--light-bg);
-        border-color: var(--dark);
-    }
-
-    /* Visual derecha del Hero */
-    .tech-card-visual {
-        background: var(--dark);
-        border-radius: 16px;
-        height: 350px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-    }
-    .tech-icon-large {
-        font-size: 120px !important;
-        color: rgba(255, 102, 0, 0.15);
-    }
-    .tech-badge {
-        position: absolute;
-        bottom: 30px;
-        left: 30px;
-        background-color: var(--primary);
-        color: #ffffff;
-        padding: 8px 16px;
-        border-radius: 6px;
-        font-weight: bold;
-    }
 
     /* ==========================================================================
-       SECCIÓN SERVICIOS (GRID MODERNO)
+       SECCIÓN SERVICIOS
        ========================================================================== */
     .services-section {
         padding: 100px 0;
@@ -268,7 +246,6 @@
         color: var(--text-main);
     }
 
-    /* Variación Tarjeta Destacada Electrónica */
     .service-card.highlighted {
         background-color: var(--dark);
         border-color: var(--dark);
@@ -296,7 +273,7 @@
     }
 
     /* ==========================================================================
-       SECCIÓN LLAMADA A LA ACCIÓN / PRESUPUESTO (NUEVO)
+       SECCIÓN LLAMADA A LA ACCIÓN / PRESUPUESTO
        ========================================================================== */
     .cta-section {
         padding: 80px 0;
@@ -326,7 +303,19 @@
     }
 
     /* ==========================================================================
-       RESPONSIVE (ADAPTACIÓN MÓVIL)
+       FOOTER
+       ========================================================================== */
+    footer {
+        background-color: #16191e;
+        color: #a0aec0;
+        padding: 20px 0;
+        text-align: center;
+        font-size: 0.85rem;
+        border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* ==========================================================================
+       RESPONSIVE
        ========================================================================== */
     @media (max-width: 992px) {
         .hero-grid {
@@ -342,9 +331,6 @@
         }
         .hero-actions {
             justify-content: center;
-        }
-        .tech-card-visual {
-            height: 200px;
         }
     }
 
@@ -368,44 +354,6 @@
             grid-template-columns: 1fr;
         }
     }
-        
-    .top-whatsapp {
-        background-color: #25d366;
-        color: #ffffff !important;
-        text-decoration: none;
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-weight: bold;
-        font-size: 0.85rem;
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        transition: var(--transition);
-    }
-
-    .top-whatsapp:hover {
-        background-color: #1ebc57;
-        transform: translateY(-1px);
-    }
-    .btn-whatsapp-nav {
-        background-color: #25d366;
-        color: #ffffff !important;
-        padding: 10px 20px;
-        border-radius: 6px;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 0.95rem;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        transition: var(--transition);
-    }
-
-    .btn-whatsapp-nav:hover {
-        background-color: #1ebc57;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-    }
     </style>
 </head>
 <body>
@@ -413,7 +361,7 @@
     <div class="top-bar">
         <div class="container top-bar-content">
             <span>📍 C/ Malasmañas 100 y Plaza Almazara Local 4, Alcalá de Guadaíra (Sevilla)</span>
-            <span> E-mail: info@microdatainformatica.com</span>
+            <span>E-mail: info@microdatainformatica.com</span>
             <a href="tel:955620607" class="top-phone"><span class="material-symbols-outlined">phone</span> 955 620 607 / 645 766 208</a>
         </div>
     </div>
@@ -421,115 +369,120 @@
     <header class="main-header">
         <div class="container nav-container">
             <a href="index.html">
-                <img src="img/logo.png" alt="Microdata Informática" class="logo">
+                <img src="https://le-cdn.website-editor.net/s/fab404f345eb4a4dab05b3716b4fea97/dms3rep/multi/opt/logo+naranja+png-1920w.png?Expires=1786397874&Signature=sNiN0jCYvnZdSXhZXwzX0TaABcD~i9t2P5GZFgkoVimPqyfTMIkM9yYBa4Na8~B7Y6WsAHLRrQl12md9hfNqe7qnaY~JdVibSADJxqfRco50NLI9xqLa~fVjr3DfmO0~lrh-U2VkpvcbE9KYISKWs6Y6aIc35Dy4mknXbsuIKp0v97DSjbOyYFX8uQysN5KKAUKqiCkSuVeM3qrtZs5ULEEZ24P34l4V-pWBi7s7ztcQRzTYjsUNl7llM4aIkiklTe0QvSqVY2JqqDkTiEGukjd5gyCs~WIGITEhO4mmG2VPpMjVGKC82h~8qpT7dCDZATDK9JFv8HuoDD9PNqM53w__&Key-Pair-Id=K2NXBXLF010TJW" alt="Microdata Informática" class="logo">
             </a>
             
             <nav class="main-nav">
                 <a href="index.html" class="nav-link active">Inicio</a>
-                <a href="index.html#servicios" class="nav-link">Servicios</a>
+                <a href="#servicios" class="nav-link">Servicios</a>
                 <a href="Reacondicionados.html" class="nav-link">Reacondicionados</a>
                 
                 <a href="https://wa.me/34645766208?text=Hola,%20quisiera%20consultar%20sobre%20un%20servicio%20o%20producto" 
                    target="_blank" 
                    rel="noopener noreferrer" 
                    class="btn-whatsapp-nav">
-                    💬 WhatsApp
+                   💬 WhatsApp
                 </a>
             </nav>
         </div>
     </header>
 
-    <section class="hero">
-        <div class="container hero-grid">
-            <div class="hero-text">
-                <span class="badge">Soporte Técnico Especializado</span>
-                <h1>Reparación Profesional de Informática y Electrónica</h1>
-                <p>No busques parches. En Microdata diagnosticamos y reparamos. Sin complicaciones. Especialistas en portátiles, torres, gaming, móviles y consolas en Sevilla.</p>
-                <div class="hero-actions">
-                    <a href="tel:955620607" class="btn btn-primary">Llamar al Taller</a>
+    <main>
+        <section class="hero">
+            <div class="container hero-grid">
+                <div class="hero-text">
+                    <span class="badge">Soporte Técnico Especializado</span>
+                    <h1>Reparación Profesional de Informática y Electrónica</h1>
+                    <p>No busques parches. En Microdata diagnosticamos y reparamos. Sin complicaciones. Especialistas en portátiles, torres, gaming, móviles y consolas en Sevilla.</p>
+                    <div class="hero-actions">
+                        <a href="tel:955620607" class="btn btn-primary">Llamar al Taller</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="servicios" class="services-section">
+        <section id="servicios" class="services-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>¿Qué equipo necesitas?</h2>
+                    <p>Soluciones de hardware, software y microelectrónica con nuestra garantía.</p>
+                </div>
+
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="card-icon-wrapper">
+                            <span class="material-symbols-outlined">laptop_mac</span>
+                        </div>
+                        <h3>Ordenadores y Portátiles</h3>
+                        <p>Cambio de pantallas, teclados, sustitución de bisagras rotas, brackets y conectores de carga.</p>
+                    </div>
+
+                    <div class="service-card highlighted">
+                        <div class="card-icon-wrapper">
+                            <span class="material-symbols-outlined">biotech</span>
+                        </div>
+                        <span class="card-badge">Especialidad</span>
+                        <h3>Organismos e Instituciones</h3>
+                        <p>Presupuestos y montajes de todo tipo de equipos informáticos. Pide tu presupuesto sin compromiso.</p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="card-icon-wrapper">
+                            <span class="material-symbols-outlined">speed</span>
+                        </div>
+                        <h3>Ampliación y SSD</h3>
+                        <p>Instalación de discos duros sólidos (SSD), clonado de datos seguro y optimización del sistema para multiplicar la velocidad.</p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="card-icon-wrapper">
+                            <span class="material-symbols-outlined">sports_esports</span>
+                        </div>
+                        <h3>Montajes Gaming</h3>
+                        <p>Montajes a medida, refrigeración avanzada, actualizaciones de componentes y optimización de rendimiento para exprimir tus FPS.</p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="card-icon-wrapper">
+                            <span class="material-symbols-outlined">smartphone</span>
+                        </div>
+                        <h3>Móviles y Consolas</h3>
+                        <p>Sustitución de pantallas, baterías, conectores HDMI de consola y fallos de alimentación internos.</p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="card-icon-wrapper">
+                            <span class="material-symbols-outlined">print</span>
+                        </div>
+                        <h3>Renting & Empresas</h3>
+                        <p>Servicio de renting de impresoras con coste por copia y mantenimiento informático preventivo para negocios.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container cta-content">
+                <h2>¿Tienes una avería o necesitas un equipo a medida?</h2>
+                <p>Cuéntanos tu problema y te daremos una estimación rápida y sin compromiso.</p>
+                <div class="cta-actions">
+                    <a href="tel:955620607" class="btn btn-primary">
+                        <span class="material-symbols-outlined">call</span>
+                        Llamar al taller
+                    </a>
+                    <a href="https://wa.me/34645766208?text=Hola,%20me%20gustaría%20pedir%20un%20presupuesto" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-nav">
+                        💬 Presupuesto por WhatsApp
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
         <div class="container">
-            <div class="section-title">
-                <h2>¿Qué equipo necesitas?</h2>
-                <p>Soluciones de hardware, software y microelectrónica con nuestra garantía.</p>
-            </div>
-
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="card-icon-wrapper">
-                        <span class="material-symbols-outlined">laptop_mac</span>
-                    </div>
-                    <h3>Ordenadores y Portátiles</h3>
-                    <p>Cambio de pantallas, teclados, sustitución de bisagras rotas, brackets y conectores de carga.</p>
-                </div>
-
-                <div class="service-card highlighted">
-                    <div class="card-icon-wrapper">
-                        <span class="material-symbols-outlined">biotech</span>
-                    </div>
-                    <span class="card-badge">Especialidad</span>
-                    <h3>Organismos e Instituciones</h3>
-                    <p>Presupuestos y montajes de todo tipo de equipos informáticos. Pide tu presupuesto sin compromiso.</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="card-icon-wrapper">
-                        <span class="material-symbols-outlined">speed</span>
-                    </div>
-                    <h3>Ampliación y SSD</h3>
-                    <p>Instalación de discos duros sólidos (SSD), clonado de datos seguro y optimización del sistema para multiplicar la velocidad.</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="card-icon-wrapper">
-                        <span class="material-symbols-outlined">sports_esports</span>
-                    </div>
-                    <h3>Montajes Gaming</h3>
-                    <p>Montajes a medida, refrigeración avanzada, actualizaciones de componentes y optimización de rendimiento para exprimir tus FPS.</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="card-icon-wrapper">
-                        <span class="material-symbols-outlined">smartphone</span>
-                    </div>
-                    <h3>Móviles y Consolas</h3>
-                    <p>Sustitución de pantallas, baterías, conectores HDMI de consola y fallos de alimentación internos.</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="card-icon-wrapper">
-                        <span class="material-symbols-outlined">print</span>
-                    </div>
-                    <h3>Renting & Empresas</h3>
-                    <p>Servicio de renting de impresoras con coste por copia y mantenimiento informático preventivo para negocios.</p>
-                </div>
-            </div>
+            <p>&copy; Microdata Informática. Todos los derechos reservados.</p>
         </div>
-    </section>
-
-    <section class="cta-section">
-        <div class="container cta-content">
-            <h2>¿Tienes una avería o necesitas un equipo a medida?</h2>
-            <p>Cuéntanos tu problema y te daremos una estimación rápida y sin compromiso.</p>
-            <div class="cta-actions">
-                <a href="contacto.html" class="btn btn-primary">
-                    <span class="material-symbols-outlined">description</span>
-                    Pide tu presupuesto ahora
-                </a>
-                <a href="https://wa.me/34645766208?text=Hola,%20me%20gustaría%20pedir%20un%20presupuesto" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-nav">
-                    💬 Presupuesto por WhatsApp
-                </a>
-            </div>
-        </div>
-    </section>
-
-</body>
-</html>
+    </footer>
 
 </body>
 </html>
