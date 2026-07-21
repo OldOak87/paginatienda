@@ -390,59 +390,75 @@ body {
         }
 
         async function cargarOrdenadores() {
-            const contenedor = document.getElementById('contenedor-ordenadores');
-            try {
-                const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSdhexOU7t2maISL623crBt7fgi1OE1WpicKy-STdiB_wsc_XXtFufO8Ua8_1XXV3cXFg-eZha3mcgu/pub?gid=0&single=true&output=csv';
-                const response = await fetch(url);
-                if (!response.ok) throw new Error('No se pudo obtener el catálogo');
-                
-                const data = await response.text();
-                const filas = data.split(/\r?\n/);
-                
-                let htmlAcumulado = '';
-                
-                for (let i = 1; i < filas.length; i++) {
-                    if (!filas[i].trim()) continue;
-                    
-                    const col = parsearCSV(filas[i]);
-                    
-                    if (col.length < 9) continue;
+    const contenedor = document.getElementById('contenedor-ordenadores');
+    if (!contenedor) return;
 
-                    const marca = col[0] || '';
-                    const modelo = col[1] || '';
-                    const pantalla = col[2] || 'N/A';
-                    const cpu = col[3] || 'N/A';
-                    const ram = col[4] || 'N/A';
-                    const ssd = col[5] || 'N/A';
-                    const so = col[6] || 'N/A';
-                    const extra = col[7] || 'Sin observaciones extras';
-                    const precio = col[8] || 'Consultar';
-                    const imagen = col[9] ? col[9] : '';
+    try {
+        const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSdhexOU7t2maISL623crBt7fgi1OE1WpicKy-STdiB_wsc_XXtFufO8Ua8_1XXV3cXFg-eZha3mcgu/pub?gid=0&single=true&output=csv';
+        
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Error HTTP: ' + response.status);
+        
+        const data = await response.text();
+        const filas = data.split(/\r?\n/);
+        
+        let htmlAcumulado = '';
+        
+        for (let i = 1; i < filas.length; i++) {
+            if (!filas[i].trim()) continue; // Ignora líneas completamente vacías
+            
+            const col = parsearCSV(filas[i]);
+            
+            // Requisito mínimo: que al menos exista la marca o modelo (mínimo 2 columnas)
+            if (col.length < 2) continue;
 
-                    const imgTag = imagen 
-                        ? `<img src="${imagen}" alt="${marca} ${modelo}" onerror="this.src='https://via.placeholder.com/300x200?text=Port%C3%A1til+Microdata'">` 
-                        : `<span class="material-symbols-outlined" style="font-size:64px; color:#cbd5e1;">laptop_chromebook</span>`;
+            const marca = col[0] || 'Portátil';
+            const modelo = col[1] || 'Reacondicionado';
+            const pantalla = col[2] || 'Consultar';
+            const cpu = col[3] || 'Consultar';
+            const ram = col[4] || 'Consultar';
+            const ssd = col[5] || 'Consultar';
+            const so = col[6] || 'Consultar';
+            const extra = col[7] || 'Sin observaciones extras';
+            const precio = col[8] || 'Consultar';
+            const imagen = col[9] ? col[9].trim() : '';
 
-                    // Sanitizamos parámetros para evitar fallos en el JavaScript del botón
-                    const argsModal = [marca, modelo, pantalla, cpu, ram, ssd, so, extra]
-                        .map(item => item.replace(/'/g, "\\'").replace(/"/g, '&quot;'));
+            // Comprobamos si la imagen es una URL válida
+            let imgTag = '';
+            if (imagen && imagen.toLowerCase().startsWith('http')) {
+                // Si la URL falla al cargar la imagen real, entra en onerror y pone el icono
+                imgTag = `<img src="${imagen}" alt="${marca} ${modelo}" onerror="this.outerHTML='<span class=\\'material-symbols-outlined\\' style=\\'font-size:64px; color:#cbd5e1;\\'>laptop_chromebook</span>';">`;
+            } else {
+                // Si la casilla está vacía o no es una URL, muestra el icono por defecto
+                imgTag = `<span class="material-symbols-outlined" style="font-size:64px; color:#cbd5e1;">laptop_chromebook</span>`;
+            }
 
-                    htmlAcumulado += `
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            ${imgTag}
-                        </div>
-                        <h3>${marca} ${modelo}</h3>
-                        <span class="product-price">${precio}</span>
-                        <div class="card-actions">
-                            <a href="tel:955620607" class="btn-buy">Reservar</a>
-                            <button onclick="abrirModal('${argsModal.join("','")}')" class="btn-details">
-                                + Detalles
-                            </button>
-                        </div>
-                    </div>`;
-                }
+            const datosClean = [marca, modelo, pantalla, cpu, ram, ssd, so, extra]
+                .map(item => item.replace(/'/g, "\\'").replace(/"/g, '&quot;'));
 
+            htmlAcumulado += `
+            <div class="product-card">
+                <div class="product-image-container">
+                    ${imgTag}
+                </div>
+                <h3>${marca} ${modelo}</h3>
+                <span class="product-price">${precio}</span>
+                <div class="card-actions">
+                    <a href="tel:955620607" class="btn-buy">Reservar</a>
+                    <button onclick="abrirModal('${datosClean.join("','")}')" class="btn-details">
+                        + Detalles
+                    </button>
+                </div>
+            </div>`;
+        }
+
+        contenedor.innerHTML = htmlAcumulado || '<p style="text-align:center; grid-column: 1/-1;">No hay equipos disponibles en este momento.</p>';
+
+    } catch (err) {
+        console.error("ERROR:", err);
+        contenedor.innerHTML = '<p style="color:#e63946; text-align:center; grid-column: 1/-1; font-weight:bold;">Error al cargar el catálogo.</p>';
+    }
+}
                 if (htmlAcumulado === '') {
                     contenedor.innerHTML = '<p style="text-align:center; grid-column: 1/-1;">No hay productos disponibles en este momento.</p>';
                 } else {
