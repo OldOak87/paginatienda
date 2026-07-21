@@ -8,7 +8,7 @@
 
     <style>
 /* ==========================================================================
-   VARIABLES Y CONFIGURACIÓN CORPORATIVA (OPCIÓN 1: TECH HERO)
+   VARIABLES Y CONFIGURACIÓN CORPORATIVA
    ========================================================================== */
 :root {
     --primary: #ff6600;        /* Naranja corporativo Microdata */
@@ -34,7 +34,7 @@ body {
     background-color: #ffffff;
     line-height: 1.6;
     background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
-    background-size: 24px 24px; /* Sutil patrón de fondo de ingeniería */
+    background-size: 24px 24px;
 }
 
 .container {
@@ -116,18 +116,8 @@ body {
 }
 
 /* ==========================================================================
-   HERO SECTION
+   ESTILOS GENERALES
    ========================================================================== */
-.hero {
-    padding: 80px 0;
-    background: linear-gradient(135deg, #ffffff 0%, var(--light-bg) 100%);
-}
-.hero-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 60px;
-    align-items: center;
-}
 .badge {
     background-color: rgba(255, 102, 0, 0.1);
     color: var(--primary);
@@ -137,91 +127,12 @@ body {
     font-weight: 700;
     text-transform: uppercase;
     display: inline-block;
-    margin-bottom: 20px;
-}
-.hero-text h1 {
-    font-size: 3.2rem;
-    color: var(--dark);
-    line-height: 1.2;
-    margin-bottom: 20px;
-    font-weight: 800;
-}
-.hero-text p {
-    font-size: 1.15rem;
-    margin-bottom: 36px;
-    max-width: 600px;
-}
-.hero-actions {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-}
-.btn {
-    padding: 14px 32px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1rem;
-    transition: var(--transition);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-.btn-primary {
-    background-color: var(--primary);
-    color: #ffffff;
-    box-shadow: 0 4px 14px rgba(255, 102, 0, 0.3);
-}
-.btn-primary:hover {
-    background-color: var(--primary-hover);
-    transform: translateY(-2px);
-}
-.btn-secondary {
-    background-color: #ffffff;
-    color: var(--dark);
-    border: 2px solid var(--border-color);
-}
-.btn-secondary:hover {
-    background-color: var(--light-bg);
-    border-color: var(--dark);
+    margin-bottom: 15px;
 }
 
-/* Visual derecha del Hero */
-.tech-card-visual {
-    background: var(--dark);
-    border-radius: 16px;
-    height: 350px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-}
-.tech-icon-large {
-    font-size: 120px !important;
-    color: rgba(255, 102, 0, 0.15);
-}
-.tech-badge {
-    position: absolute;
-    bottom: 30px;
-    left: 30px;
-    background-color: var(--primary);
-    color: #ffffff;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-weight: bold;
-}
-
-/* ==========================================================================
-   SECCIÓN SERVICIOS (GRID MODERNO)
-   ========================================================================== */
-.services-section {
-    padding: 100px 0;
-    background-color: #ffffff;
-}
 .section-title {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
 }
 .section-title h2 {
     font-size: 2.4rem;
@@ -229,92 +140,189 @@ body {
     margin-bottom: 15px;
     font-weight: 700;
 }
-.services-grid {
+.section-title p {
+    max-width: 650px;
+    margin: 0 auto;
+    font-size: 1.05rem;
+}
+
+/* ==========================================================================
+   SECCIÓN REACONDICIONADOS (NUEVOS ESTILOS AÑADIDOS)
+   ========================================================================== */
+.reconditioned-section {
+    padding: 60px 0 100px;
+}
+
+.products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
+    margin-bottom: 80px;
 }
-.service-card {
-    background-color: #ffffff;
+
+.product-card {
+    background: #ffffff;
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    padding: 40px 30px;
-    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
     transition: var(--transition);
 }
-.service-card:hover {
+
+.product-card:hover {
     transform: translateY(-8px);
     box-shadow: var(--shadow);
     border-color: transparent;
 }
-.card-icon-wrapper {
-    color: var(--primary);
-    margin-bottom: 24px;
-}
-.card-icon-wrapper .material-symbols-outlined {
-    font-size: 36px;
-}
-.service-card h3 {
-    font-size: 1.4rem;
-    color: var(--dark);
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-.service-card p {
-    font-size: 0.95rem;
-    color: var(--text-main);
+
+.product-image-wrapper {
+    background-color: var(--light-bg);
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-bottom: 1px solid var(--border-color);
 }
 
-/* Variación Tarjeta Destacada Electrónica */
-.service-card.highlighted {
-    background-color: var(--dark);
-    border-color: var(--dark);
+.product-placeholder-icon {
+    font-size: 80px !important;
+    color: #ced4da;
 }
-.service-card.highlighted h3 {
-    color: #ffffff;
-}
-.service-card.highlighted p {
-    color: #a0aec0;
-}
-.service-card.highlighted .card-icon-wrapper {
-    color: var(--primary);
-}
-.card-badge {
+
+.product-tag {
     position: absolute;
-    top: 24px;
-    right: 24px;
-    background-color: var(--primary);
-    color: #ffffff;
-    font-size: 0.75rem;
-    font-weight: bold;
-    padding: 4px 10px;
+    top: 15px;
+    right: 15px;
+    padding: 4px 12px;
     border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
     text-transform: uppercase;
 }
 
-/* ==========================================================================
-   RESPONSIVE (ADAPTACIÓN MÓVIL)
-   ========================================================================== */
-@media (max-width: 992px) {
-    .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        text-align: center;
-    }
-    .hero-text h1 {
-        font-size: 2.4rem;
-    }
-    .hero-text p {
-        margin: 0 auto 30px;
-    }
-    .hero-actions {
-        justify-content: center;
-    }
-    .tech-card-visual {
-        height: 200px;
-    }
+.product-tag.discount { background: #e63946; color: #fff; }
+.product-tag.guaranteed { background: var(--dark); color: #fff; }
+.product-tag.special { background: var(--primary); color: #fff; }
+
+.product-info {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
+.product-category {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--primary);
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+}
+
+.product-info h3 {
+    font-size: 1.25rem;
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+.product-specs {
+    font-size: 0.9rem;
+    color: var(--text-main);
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.product-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.status-indicator.available { background-color: #2ec4b6; }
+.status-indicator.low-stock { background-color: #ff9f1c; }
+
+.product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 15px;
+    margin-top: auto;
+}
+
+.product-price {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.btn-product-cta {
+    background-color: var(--primary);
+    color: #ffffff;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: var(--transition);
+}
+
+.btn-product-cta:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Tarjeta Destacada */
+.product-card.highlighted-product {
+    border: 2px solid var(--primary);
+}
+
+/* BANNER DE CONFIANZA */
+.trust-banner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    background-color: var(--dark);
+    color: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+}
+
+.trust-item {
+    text-align: center;
+}
+
+.trust-item .material-symbols-outlined {
+    font-size: 40px;
+    color: var(--primary);
+    margin-bottom: 12px;
+}
+
+.trust-item h4 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.trust-item p {
+    font-size: 0.85rem;
+    color: #a0aec0;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
 @media (max-width: 768px) {
     .nav-container {
         flex-direction: column;
@@ -331,123 +339,126 @@ body {
         justify-content: center;
         text-align: center;
     }
-    .services-grid {
+    .products-grid {
         grid-template-columns: 1fr;
     }
 }
-</style>
-    </head>
+    </style>
+</head>
 <body>
 
-<div class="top-bar">
+    <div class="top-bar">
         <div class="container top-bar-content">
             <span>📍 C/ Malasmañas 100 y Plaza Almazara Local 4, Alcalá de Guadaíra (Sevilla)</span>
-	    <span> E-mail: info@microdatainformatica.com</span>
+            <span>E-mail: info@microdatainformatica.com</span>
             <a href="tel:955620607" class="top-phone"><span class="material-symbols-outlined">phone</span> 955 620 607 / 645 766 208</a>
         </div>
     </div>
 
-	<header class="main-header">
+    <header class="main-header">
         <div class="container nav-container">
-            <img src="https://cdn.website-editor.net/s/fab404f345eb4a4dab05b3716b4fea97/dms3rep/multi/logo+naranja+png.png" alt="Microdata Informática" class="logo">
+            <a href="index.html">
+                <img src="https://cdn.website-editor.net/s/fab404f345eb4a4dab05b3716b4fea97/dms3rep/multi/logo+naranja+png.png" alt="Microdata Informática" class="logo">
+            </a>
             
             <nav class="main-nav">
-                <a href="#" class="nav-link active">Inicio</a>
-                <a href="#servicios" class="nav-link">Servicios</a>
+                <a href="index.html" class="nav-link active">Inicio</a>
+                <a href="index.html#servicios" class="nav-link">Servicios</a>
                 <a href="Reacondicionados.html" class="nav-link">Reacondicionados</a>
-                <a href="#contacto" class="nav-link btn-header">Contacto</a>
+                <a href="index.html#contacto" class="nav-link btn-header">Contacto</a>
             </nav>
         </div>
     </header>
 
-<section id="reacondicionados" class="reconditioned-section">
-    <div class="container">
-        
-        <div class="section-title">
-            <span class="badge">Ocasión Garantizada</span>
-            <h2>Equipos Reacondicionados y de Ocasión</h2>
-            <p>Ordenadores y portátiles revisados a nivel de hardware y electrónica. Rendimiento profesional con total garantía.</p>
-        </div>
-
-        <div class="products-grid">
+    <section id="reacondicionados" class="reconditioned-section">
+        <div class="container">
             
-            <div class="product-card animate-card">
-                <div class="product-image-wrapper">
-                    <span class="material-symbols-outlined product-placeholder-icon">laptop_chromebook</span>
-                    <span class="product-tag discount">Oferta</span>
-                </div>
-                <div class="product-info">
-                    <span class="product-category">Portátiles</span>
-                    <h3>Gama Profesional / Empresa</h3>
-                    <p class="product-specs">Procesadores Intel i5/i7, mínimos de 8GB/16GB RAM y discos duros sólidos SSD nuevos instalados.</p>
-                    <div class="product-status">
-                        <span class="status-indicator available"></span> Disponible en tienda
-                    </div>
-                    <div class="product-footer">
-                        <a href="portatilesreacondicionados.html" class="btn-product-cta">Ver Stock</a>
-                    </div>
-                </div>
+            <div class="section-title">
+                <span class="badge">Ocasión Garantizada</span>
+                <h2>Equipos Reacondicionados y de Ocasión</h2>
+                <p>Ordenadores y portátiles revisados a nivel de hardware y electrónica. Rendimiento profesional con total garantía.</p>
             </div>
 
-            <div class="product-card animate-card">
-                <div class="product-image-wrapper">
-                    <span class="material-symbols-outlined product-placeholder-icon">desktop_windows</span>
-                    <span class="product-tag guaranteed">Garantía Microdata</span>
-                </div>
-                <div class="product-info">
-                    <span class="product-category">Sobremesa</span>
-                    <h3>Torres de Ocasión / Oficina</h3>
-                    <p class="product-specs">Equipos ideales para gestión, oficina, estudiantes o uso doméstico. Formato optimizado y testeo de placa completado.</p>
-                    <div class="product-status">
-                        <span class="status-indicator available"></span> Disponible en tienda
+            <div class="products-grid">
+                
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <span class="material-symbols-outlined product-placeholder-icon">laptop_chromebook</span>
+                        <span class="product-tag discount">Oferta</span>
                     </div>
-                    <div class="product-footer">
-                        <span class="product-price">Consultar precio</span>
-                        <a href="tel:955620607" class="btn-product-cta">Preguntar</a>
+                    <div class="product-info">
+                        <span class="product-category">Portátiles</span>
+                        <h3>Gama Profesional / Empresa</h3>
+                        <p class="product-specs">Procesadores Intel i5/i7, mínimos de 8GB/16GB RAM y discos duros sólidos SSD nuevos instalados.</p>
+                        <div class="product-status">
+                            <span class="status-indicator available"></span> Disponible en tienda
+                        </div>
+                        <div class="product-footer">
+                            <a href="portatilesreacondicionados.html" class="btn-product-cta">Ver Stock</a>
+                        </div>
                     </div>
                 </div>
+
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <span class="material-symbols-outlined product-placeholder-icon">desktop_windows</span>
+                        <span class="product-tag guaranteed">Garantía Microdata</span>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Sobremesa</span>
+                        <h3>Torres de Ocasión / Oficina</h3>
+                        <p class="product-specs">Equipos ideales para gestión, oficina, estudiantes o uso doméstico. Formato optimizado y testeo de placa completado.</p>
+                        <div class="product-status">
+                            <span class="status-indicator available"></span> Disponible en tienda
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">Consultar precio</span>
+                            <a href="tel:955620607" class="btn-product-cta">Preguntar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card highlighted-product">
+                    <div class="product-image-wrapper">
+                        <span class="material-symbols-outlined product-placeholder-icon">sports_esports</span>
+                        <span class="product-tag special">Alto Rendimiento</span>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Gaming</span>
+                        <h3>PCs Gaming a Medida y Ocasión</h3>
+                        <p class="product-specs">Configuraciones optimizadas con tarjetas gráficas dedicadas GTX/RTX, chasis con ventilación avanzada y fuentes certificadas.</p>
+                        <div class="product-status">
+                            <span class="status-indicator low-stock"></span> Stock Limitado
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">Configuraciones desde taller</span>
+                            <a href="tel:955620607" class="btn-product-cta">Pedir Info</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="product-card highlighted-product animate-card">
-                <div class="product-image-wrapper">
-                    <span class="material-symbols-outlined product-placeholder-icon">sports_esports</span>
-                    <span class="product-tag special">Alto Rendimiento</span>
+            <div class="trust-banner">
+                <div class="trust-item">
+                    <span class="material-symbols-outlined">verified</span>
+                    <h4>Garantía Real</h4>
+                    <p>Todos nuestros equipos salen testeados en más de 20 puntos críticos de hardware.</p>
                 </div>
-                <div class="product-info">
-                    <span class="product-category">Gaming</span>
-                    <h3>PCs Gaming a Medida y Ocasión</h3>
-                    <p class="product-specs">Configuraciones optimizadas con tarjetas gráficas dedicadas GTX/RTX, chasis con ventilación avanzada y fuentes certificadas.</p>
-                    <div class="product-status">
-                        <span class="status-indicator low-stock"></span> Stock Limitado
-                    </div>
-                    <div class="product-footer">
-                        <span class="product-price">Configuraciones desde taller</span>
-                        <a href="tel:955620607" class="btn-product-cta">Pedir Info</a>
-                    </div>
+                <div class="trust-item">
+                    <span class="material-symbols-outlined">published_with_changes</span>
+                    <h4>Clonación Disponible</h4>
+                    <p>Pasamos los datos de tu ordenador viejo al nuevo reacondicionado sin pérdidas.</p>
+                </div>
+                <div class="trust-item">
+                    <span class="material-symbols-outlined">support_agent</span>
+                    <h4>Soporte Post-Venta</h4>
+                    <p>Cualquier problema se soluciona directamente contactando con nosotros.</p>
                 </div>
             </div>
 
         </div>
+    </section>
 
-        <div class="trust-banner">
-            <div class="trust-item">
-                <span class="material-symbols-outlined">verified</span>
-                <h4>Garantía Real</h4>
-                <p>Todos nuestros equipos salen testeados en más de 20 puntos críticos de hardware.</p>
-            </div>
-            <div class="trust-item">
-                <span class="material-symbols-outlined">published_with_changes</span>
-                <h4>Clonación Disponible</h4>
-                <p>Pasamos los datos de tu ordenador viejo al nuevo reacondicionado sin pérdidas.</p>
-            </div>
-            <div class="trust-item">
-                <span class="material-symbols-outlined">support_agent</span>
-                <h4>Soporte Post-Venta</h4>
-                <p>Cualquier problema se soluciona directamente contactando con nosotros.</p>
-            </div>
-        </div>
-
-    </div>
-</section>
-    </body>
+</body>
 </html>
