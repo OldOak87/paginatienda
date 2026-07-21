@@ -348,7 +348,25 @@ body {
     background-color: #1ebc57;
     transform: translateY(-1px);
 }
-	
+	.btn-whatsapp-nav {
+    background-color: #25d366;
+    color: #ffffff !important;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+}
+
+.btn-whatsapp-nav:hover {
+    background-color: #1ebc57;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
 </style>
 <head>
     <meta charset="UTF-8">
@@ -365,27 +383,30 @@ body {
             <span>📍 C/ Malasmañas 100 y Plaza Almazara Local 4, Alcalá de Guadaíra (Sevilla)</span>
 	    <span> E-mail: info@microdatainformatica.com</span>
             <a href="tel:955620607" class="top-phone"><span class="material-symbols-outlined">phone</span> 955 620 607 / 645 766 208</a>
-			<a href="https://wa.me/34645766208?text=Hola,%20quisiera%20consultar%20sobre%20un%20servicio%20o%20producto" 
-               target="_blank" 
-               class="top-whatsapp">
-                💬 WhatsApp
-			</a>
-					
+								
         </div>
     </div>
 
     <header class="main-header">
-        <div class="container nav-container">
-            <img src="https://le-cdn.website-editor.net/s/fab404f345eb4a4dab05b3716b4fea97/dms3rep/multi/opt/logo+naranja+png-1920w.png?Expires=1786397874&Signature=sNiN0jCYvnZdSXhZXwzX0TaABcD~i9t2P5GZFgkoVimPqyfTMIkM9yYBa4Na8~B7Y6WsAHLRrQl12md9hfNqe7qnaY~JdVibSADJxqfRco50NLI9xqLa~fVjr3DfmO0~lrh-U2VkpvcbE9KYISKWs6Y6aIc35Dy4mknXbsuIKp0v97DSjbOyYFX8uQysN5KKAUKqiCkSuVeM3qrtZs5ULEEZ24P34l4V-pWBi7s7ztcQRzTYjsUNl7llM4aIkiklTe0QvSqVY2JqqDkTiEGukjd5gyCs~WIGITEhO4mmG2VPpMjVGKC82h~8qpT7dCDZATDK9JFv8HuoDD9PNqM53w__&Key-Pair-Id=K2NXBXLF010TJW" alt="Microdata Informática" class="logo">
+    <div class="container nav-container">
+        <a href="index.html">
+            <img src="https://cdn.website-editor.net/s/fab404f345eb4a4dab05b3716b4fea97/dms3rep/multi/logo+naranja+png.png" alt="Microdata Informática" class="logo">
+        </a>
+        
+        <nav class="main-nav">
+            <a href="index.html" class="nav-link active">Inicio</a>
+            <a href="index.html#servicios" class="nav-link">Servicios</a>
+            <a href="Reacondicionados.html" class="nav-link">Reacondicionados</a>
             
-            <nav class="main-nav">
-                <a href="#" class="nav-link active">Inicio</a>
-                <a href="#servicios" class="nav-link">Servicios</a>
-                <a href="Reacondicionados.html" class="nav-link">Reacondicionados</a>
-                <a href="#contacto" class="nav-link btn-header">Contacto</a>
-            </nav>
-        </div>
-    </header>
+            <a href="https://wa.me/34645766208?text=Hola,%20quisiera%20consultar%20sobre%20un%20servicio%20o%20producto" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="btn-whatsapp-nav">
+                💬 WhatsApp
+            </a>
+        </nav>
+    </div>
+</header>
 
     <section class="hero">
         <div class="container hero-grid">
