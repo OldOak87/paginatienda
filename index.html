@@ -1,373 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-<style>
-/* ==========================================================================
-   VARIABLES Y CONFIGURACIÓN CORPORATIVA (OPCIÓN 1: TECH HERO)
-   ========================================================================== */
-:root {
-    --primary: #ff6600;        /* Naranja corporativo Microdata */
-    --primary-hover: #e05500;
-    --dark: #1e2229;           /* Gris técnico oscuro */
-    --light-bg: #f8f9fa;       /* Fondo limpio */
-    --border-color: #e9ecef;
-    --text-main: #495057;
-    --text-title: #212529;
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    color: var(--text-main);
-    background-color: #ffffff;
-    line-height: 1.6;
-    background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
-    background-size: 24px 24px; /* Sutil patrón de fondo de ingeniería */
-}
-
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
-}
-
-/* ==========================================================================
-   TOP BAR & HEADER
-   ========================================================================== */
-.top-bar {
-    background-color: var(--dark);
-    color: #ffffff;
-    font-size: 0.85rem;
-    padding: 10px 0;
-    border-bottom: 2px solid var(--primary);
-}
-.top-bar-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-.top-phone {
-    color: #ffffff;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-weight: bold;
-}
-
-.main-header {
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.02);
-}
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 80px;
-}
-.logo {
-    height: 48px;
-    width: auto;
-    object-fit: contain;
-}
-.main-nav {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-}
-.nav-link {
-    color: var(--text-title);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: var(--transition);
-}
-.nav-link:hover, .nav-link.active {
-    color: var(--primary);
-}
-.btn-header {
-    background-color: var(--dark);
-    color: #ffffff;
-    padding: 10px 20px;
-    border-radius: 6px;
-}
-.btn-header:hover {
-    background-color: var(--primary);
-    color: #ffffff;
-}
-
-/* ==========================================================================
-   HERO SECTION
-   ========================================================================== */
-.hero {
-    padding: 80px 0;
-    background: linear-gradient(135deg, #ffffff 0%, var(--light-bg) 100%);
-}
-.hero-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 60px;
-    align-items: center;
-}
-.badge {
-    background-color: rgba(255, 102, 0, 0.1);
-    color: var(--primary);
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    display: inline-block;
-    margin-bottom: 20px;
-}
-.hero-text h1 {
-    font-size: 3.2rem;
-    color: var(--dark);
-    line-height: 1.2;
-    margin-bottom: 20px;
-    font-weight: 800;
-}
-.hero-text p {
-    font-size: 1.15rem;
-    margin-bottom: 36px;
-    max-width: 600px;
-}
-.hero-actions {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-}
-.btn {
-    padding: 14px 32px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1rem;
-    transition: var(--transition);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-.btn-primary {
-    background-color: var(--primary);
-    color: #ffffff;
-    box-shadow: 0 4px 14px rgba(255, 102, 0, 0.3);
-}
-.btn-primary:hover {
-    background-color: var(--primary-hover);
-    transform: translateY(-2px);
-}
-.btn-secondary {
-    background-color: #ffffff;
-    color: var(--dark);
-    border: 2px solid var(--border-color);
-}
-.btn-secondary:hover {
-    background-color: var(--light-bg);
-    border-color: var(--dark);
-}
-
-/* Visual derecha del Hero */
-.tech-card-visual {
-    background: var(--dark);
-    border-radius: 16px;
-    height: 350px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-}
-.tech-icon-large {
-    font-size: 120px !important;
-    color: rgba(255, 102, 0, 0.15);
-}
-.tech-badge {
-    position: absolute;
-    bottom: 30px;
-    left: 30px;
-    background-color: var(--primary);
-    color: #ffffff;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-weight: bold;
-}
-
-/* ==========================================================================
-   SECCIÓN SERVICIOS (GRID MODERNO)
-   ========================================================================== */
-.services-section {
-    padding: 100px 0;
-    background-color: #ffffff;
-}
-.section-title {
-    text-align: center;
-    margin-bottom: 60px;
-}
-.section-title h2 {
-    font-size: 2.4rem;
-    color: var(--dark);
-    margin-bottom: 15px;
-    font-weight: 700;
-}
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px;
-}
-.service-card {
-    background-color: #ffffff;
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 40px 30px;
-    position: relative;
-    transition: var(--transition);
-}
-.service-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow);
-    border-color: transparent;
-}
-.card-icon-wrapper {
-    color: var(--primary);
-    margin-bottom: 24px;
-}
-.card-icon-wrapper .material-symbols-outlined {
-    font-size: 36px;
-}
-.service-card h3 {
-    font-size: 1.4rem;
-    color: var(--dark);
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-.service-card p {
-    font-size: 0.95rem;
-    color: var(--text-main);
-}
-
-/* Variación Tarjeta Destacada Electrónica */
-.service-card.highlighted {
-    background-color: var(--dark);
-    border-color: var(--dark);
-}
-.service-card.highlighted h3 {
-    color: #ffffff;
-}
-.service-card.highlighted p {
-    color: #a0aec0;
-}
-.service-card.highlighted .card-icon-wrapper {
-    color: var(--primary);
-}
-.card-badge {
-    position: absolute;
-    top: 24px;
-    right: 24px;
-    background-color: var(--primary);
-    color: #ffffff;
-    font-size: 0.75rem;
-    font-weight: bold;
-    padding: 4px 10px;
-    border-radius: 4px;
-    text-transform: uppercase;
-}
-
-/* ==========================================================================
-   RESPONSIVE (ADAPTACIÓN MÓVIL)
-   ========================================================================== */
-@media (max-width: 992px) {
-    .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        text-align: center;
-    }
-    .hero-text h1 {
-        font-size: 2.4rem;
-    }
-    .hero-text p {
-        margin: 0 auto 30px;
-    }
-    .hero-actions {
-        justify-content: center;
-    }
-    .tech-card-visual {
-        height: 200px;
-    }
-}
-
-@media (max-width: 768px) {
-    .nav-container {
-        flex-direction: column;
-        height: auto;
-        padding: 20px;
-        gap: 20px;
-    }
-    .main-nav {
-        gap: 16px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    .top-bar-content {
-        justify-content: center;
-        text-align: center;
-    }
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-}
-	
-.top-whatsapp {
-    background-color: #25d366;
-    color: #ffffff !important;
-    text-decoration: none;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-weight: bold;
-    font-size: 0.85rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    transition: var(--transition);
-}
-
-.top-whatsapp:hover {
-    background-color: #1ebc57;
-    transform: translateY(-1px);
-}
-	.btn-whatsapp-nav {
-    background-color: #25d366;
-    color: #ffffff !important;
-    padding: 10px 20px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 0.95rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: var(--transition);
-}
-
-.btn-whatsapp-nav:hover {
-    background-color: #1ebc57;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-}
-</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -375,38 +7,437 @@ body {
     <meta name="description" content="Servicio técnico profesional de ordenadores, portátiles, móviles, consolas y reparación en Alcalá de Guadaíra, Sevilla.">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <style>
+    /* ==========================================================================
+       VARIABLES Y CONFIGURACIÓN CORPORATIVA (OPCIÓN 1: TECH HERO)
+       ========================================================================== */
+    :root {
+        --primary: #ff6600;        /* Naranja corporativo Microdata */
+        --primary-hover: #e05500;
+        --dark: #1e2229;            /* Gris técnico oscuro */
+        --light-bg: #f8f9fa;       /* Fondo limpio */
+        --border-color: #e9ecef;
+        --text-main: #495057;
+        --text-title: #212529;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        color: var(--text-main);
+        background-color: #ffffff;
+        line-height: 1.6;
+        background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+        background-size: 24px 24px; /* Sutil patrón de fondo de ingeniería */
+    }
+
+    .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    /* ==========================================================================
+       TOP BAR & HEADER
+       ========================================================================== */
+    .top-bar {
+        background-color: var(--dark);
+        color: #ffffff;
+        font-size: 0.85rem;
+        padding: 10px 0;
+        border-bottom: 2px solid var(--primary);
+    }
+    .top-bar-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .top-phone {
+        color: #ffffff;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-weight: bold;
+    }
+
+    .main-header {
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 20px rgba(0,0,0,0.02);
+    }
+    .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 80px;
+    }
+    .logo {
+        height: 48px;
+        width: auto;
+        object-fit: contain;
+    }
+    .main-nav {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+    }
+    .nav-link {
+        color: var(--text-title);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: var(--transition);
+    }
+    .nav-link:hover, .nav-link.active {
+        color: var(--primary);
+    }
+    .btn-header {
+        background-color: var(--dark);
+        color: #ffffff;
+        padding: 10px 20px;
+        border-radius: 6px;
+    }
+    .btn-header:hover {
+        background-color: var(--primary);
+        color: #ffffff;
+    }
+
+    /* ==========================================================================
+       HERO SECTION
+       ========================================================================== */
+    .hero {
+        padding: 80px 0;
+        background: linear-gradient(135deg, #ffffff 0%, var(--light-bg) 100%);
+    }
+    .hero-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 60px;
+        align-items: center;
+    }
+    .badge {
+        background-color: rgba(255, 102, 0, 0.1);
+        color: var(--primary);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+    .hero-text h1 {
+        font-size: 3.2rem;
+        color: var(--dark);
+        line-height: 1.2;
+        margin-bottom: 20px;
+        font-weight: 800;
+    }
+    .hero-text p {
+        font-size: 1.15rem;
+        margin-bottom: 36px;
+        max-width: 600px;
+    }
+    .hero-actions {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+    .btn {
+        padding: 14px 32px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1rem;
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+    .btn-primary {
+        background-color: var(--primary);
+        color: #ffffff;
+        box-shadow: 0 4px 14px rgba(255, 102, 0, 0.3);
+    }
+    .btn-primary:hover {
+        background-color: var(--primary-hover);
+        transform: translateY(-2px);
+    }
+    .btn-secondary {
+        background-color: #ffffff;
+        color: var(--dark);
+        border: 2px solid var(--border-color);
+    }
+    .btn-secondary:hover {
+        background-color: var(--light-bg);
+        border-color: var(--dark);
+    }
+
+    /* Visual derecha del Hero */
+    .tech-card-visual {
+        background: var(--dark);
+        border-radius: 16px;
+        height: 350px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+    .tech-icon-large {
+        font-size: 120px !important;
+        color: rgba(255, 102, 0, 0.15);
+    }
+    .tech-badge {
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+        background-color: var(--primary);
+        color: #ffffff;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-weight: bold;
+    }
+
+    /* ==========================================================================
+       SECCIÓN SERVICIOS (GRID MODERNO)
+       ========================================================================== */
+    .services-section {
+        padding: 100px 0;
+        background-color: #ffffff;
+    }
+    .section-title {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+    .section-title h2 {
+        font-size: 2.4rem;
+        color: var(--dark);
+        margin-bottom: 15px;
+        font-weight: 700;
+    }
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+    }
+    .service-card {
+        background-color: #ffffff;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 40px 30px;
+        position: relative;
+        transition: var(--transition);
+    }
+    .service-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow);
+        border-color: transparent;
+    }
+    .card-icon-wrapper {
+        color: var(--primary);
+        margin-bottom: 24px;
+    }
+    .card-icon-wrapper .material-symbols-outlined {
+        font-size: 36px;
+    }
+    .service-card h3 {
+        font-size: 1.4rem;
+        color: var(--dark);
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+    .service-card p {
+        font-size: 0.95rem;
+        color: var(--text-main);
+    }
+
+    /* Variación Tarjeta Destacada Electrónica */
+    .service-card.highlighted {
+        background-color: var(--dark);
+        border-color: var(--dark);
+    }
+    .service-card.highlighted h3 {
+        color: #ffffff;
+    }
+    .service-card.highlighted p {
+        color: #a0aec0;
+    }
+    .service-card.highlighted .card-icon-wrapper {
+        color: var(--primary);
+    }
+    .card-badge {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        background-color: var(--primary);
+        color: #ffffff;
+        font-size: 0.75rem;
+        font-weight: bold;
+        padding: 4px 10px;
+        border-radius: 4px;
+        text-transform: uppercase;
+    }
+
+    /* ==========================================================================
+       SECCIÓN LLAMADA A LA ACCIÓN / PRESUPUESTO (NUEVO)
+       ========================================================================== */
+    .cta-section {
+        padding: 80px 0;
+        background-color: var(--dark);
+        color: #ffffff;
+        text-align: center;
+        border-top: 4px solid var(--primary);
+    }
+    .cta-content h2 {
+        font-size: 2.2rem;
+        margin-bottom: 15px;
+        font-weight: 700;
+    }
+    .cta-content p {
+        font-size: 1.1rem;
+        color: #a0aec0;
+        margin-bottom: 30px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .cta-actions {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE (ADAPTACIÓN MÓVIL)
+       ========================================================================== */
+    @media (max-width: 992px) {
+        .hero-grid {
+            grid-template-columns: 1fr;
+            gap: 40px;
+            text-align: center;
+        }
+        .hero-text h1 {
+            font-size: 2.4rem;
+        }
+        .hero-text p {
+            margin: 0 auto 30px;
+        }
+        .hero-actions {
+            justify-content: center;
+        }
+        .tech-card-visual {
+            height: 200px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .nav-container {
+            flex-direction: column;
+            height: auto;
+            padding: 20px;
+            gap: 20px;
+        }
+        .main-nav {
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .top-bar-content {
+            justify-content: center;
+            text-align: center;
+        }
+        .services-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+        
+    .top-whatsapp {
+        background-color: #25d366;
+        color: #ffffff !important;
+        text-decoration: none;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 0.85rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        transition: var(--transition);
+    }
+
+    .top-whatsapp:hover {
+        background-color: #1ebc57;
+        transform: translateY(-1px);
+    }
+    .btn-whatsapp-nav {
+        background-color: #25d366;
+        color: #ffffff !important;
+        padding: 10px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.95rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: var(--transition);
+    }
+
+    .btn-whatsapp-nav:hover {
+        background-color: #1ebc57;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    }
+    </style>
 </head>
 <body>
 
     <div class="top-bar">
         <div class="container top-bar-content">
             <span>📍 C/ Malasmañas 100 y Plaza Almazara Local 4, Alcalá de Guadaíra (Sevilla)</span>
-	    <span> E-mail: info@microdatainformatica.com</span>
+            <span> E-mail: info@microdatainformatica.com</span>
             <a href="tel:955620607" class="top-phone"><span class="material-symbols-outlined">phone</span> 955 620 607 / 645 766 208</a>
-								
         </div>
     </div>
 
     <header class="main-header">
-    <div class="container nav-container">
-       <a href="index.html">
-    <img src="https://le-cdn.website-editor.net/s/fab404f345eb4a4dab05b3716b4fea97/dms3rep/multi/opt/logo+naranja+png-1920w.png?Expires=1786397874&Signature=sNiN0jCYvnZdSXhZXwzX0TaABcD~i9t2P5GZFgkoVimPqyfTMIkM9yYBa4Na8~B7Y6WsAHLRrQl12md9hfNqe7qnaY~JdVibSADJxqfRco50NLI9xqLa~fVjr3DfmO0~lrh-U2VkpvcbE9KYISKWs6Y6aIc35Dy4mknXbsuIKp0v97DSjbOyYFX8uQysN5KKAUKqiCkSuVeM3qrtZs5ULEEZ24P34l4V-pWBi7s7ztcQRzTYjsUNl7llM4aIkiklTe0QvSqVY2JqqDkTiEGukjd5gyCs~WIGITEhO4mmG2VPpMjVGKC82h~8qpT7dCDZATDK9JFv8HuoDD9PNqM53w__&Key-Pair-Id=K2NXBXLF010TJW" alt="Microdata Informática" class="logo">
-</a>
-        
-        <nav class="main-nav">
-            <a href="index.html" class="nav-link active">Inicio</a>
-            <a href="index.html#servicios" class="nav-link">Servicios</a>
-            <a href="Reacondicionados.html" class="nav-link">Reacondicionados</a>
-            
-            <a href="https://wa.me/34645766208?text=Hola,%20quisiera%20consultar%20sobre%20un%20servicio%20o%20producto" 
-               target="_blank" 
-               rel="noopener noreferrer" 
-               class="btn-whatsapp-nav">
-                💬 WhatsApp
+        <div class="container nav-container">
+            <a href="index.html">
+                <img src="img/logo.png" alt="Microdata Informática" class="logo">
             </a>
-        </nav>
-    </div>
-</header>
+            
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link active">Inicio</a>
+                <a href="index.html#servicios" class="nav-link">Servicios</a>
+                <a href="Reacondicionados.html" class="nav-link">Reacondicionados</a>
+                
+                <a href="https://wa.me/34645766208?text=Hola,%20quisiera%20consultar%20sobre%20un%20servicio%20o%20producto" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="btn-whatsapp-nav">
+                    💬 WhatsApp
+                </a>
+            </nav>
+        </div>
+    </header>
 
     <section class="hero">
         <div class="container hero-grid">
@@ -416,9 +447,9 @@ body {
                 <p>No busques parches. En Microdata diagnosticamos y reparamos. Sin complicaciones. Especialistas en portátiles, torres, gaming, móviles y consolas en Sevilla.</p>
                 <div class="hero-actions">
                     <a href="tel:955620607" class="btn btn-primary">Llamar al Taller</a>
-                 </div>
+                </div>
             </div>
-            
+        </div>
     </section>
 
     <section id="servicios" class="services-section">
@@ -480,6 +511,25 @@ body {
             </div>
         </div>
     </section>
+
+    <section class="cta-section">
+        <div class="container cta-content">
+            <h2>¿Tienes una avería o necesitas un equipo a medida?</h2>
+            <p>Cuéntanos tu problema y te daremos una estimación rápida y sin compromiso.</p>
+            <div class="cta-actions">
+                <a href="contacto.html" class="btn btn-primary">
+                    <span class="material-symbols-outlined">description</span>
+                    Pide tu presupuesto ahora
+                </a>
+                <a href="https://wa.me/34645766208?text=Hola,%20me%20gustaría%20pedir%20un%20presupuesto" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-nav">
+                    💬 Presupuesto por WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
 
 </body>
 </html>
